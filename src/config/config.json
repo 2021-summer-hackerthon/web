@@ -1,3 +1,3 @@
 {
-  "SERVER": "http://localhost:8811/api/hotplace"
+  "SERVER": "http://172.16.1.207:8811/api/hotplace"
 }

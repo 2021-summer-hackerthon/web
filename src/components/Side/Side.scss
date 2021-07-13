@@ -3,8 +3,33 @@
   max-width: 400px;
   width: 100%;
   height: 100%;
-  background-color: #FFEEC3;
+  background-color: #ffeec3;
   display: flex;
   overflow-y: scroll;
   flex-direction: column;
+  &-TitleWrap {
+    margin-top: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    &-Category {
+      transition: 0.5s;
+      cursor: pointer;
+      width: 64px;
+      height: 40px;
+      background-color: #ffcf54;
+      border-radius: 9999px;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      line-height: 40px;
+      margin-right: 16px;
+      color: white;
+      &:hover {
+        transition: 0.5s;
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+      }
+    }
+  }
 }

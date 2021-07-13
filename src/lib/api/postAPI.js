@@ -1,4 +1,3 @@
-import { SERVER } from "config/config.json";
 import { customAxios } from "lib/CustomAxios";
 
 export const GETCOMMENTPOSTS = async () => {

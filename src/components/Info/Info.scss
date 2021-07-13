@@ -14,9 +14,15 @@
   text-align: center;
   align-items: center;
   padding: 0px 26px;
+  &-Close {
+    margin-top: 8px;
+    display: inline-block;
+    float: right;
+    cursor: pointer;
+  }
   &-Image {
     display: inline-block;
-    margin-top: 60px;
+    margin-top: 16px;
     max-width: 344px;
     min-width: 344px;
     width: 100%;

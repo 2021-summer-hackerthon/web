@@ -34,3 +34,8 @@ export const fivePosts = atom({
   key: "fivePosts",
   default: [],
 });
+
+export const AllPostsCategoryState = atom({
+  key:'AllPostsCategoryState',
+  default: 0
+});

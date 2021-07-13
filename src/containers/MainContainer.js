@@ -26,6 +26,13 @@ const MainContainer = () => {
       let infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
       const ps = new kakao.maps.services.Places();
       ps.keywordSearch(place, placesSearchCB);
+      var marker = new kakao.maps.Marker({
+        // 지도 중심좌표에 마커를 생성합니다
+        position: map.getCenter(),
+      });
+      // 지도에 마커를 표시합니다
+      marker.setMap(map);
+      var geocoder = new kakao.maps.services.Geocoder();
 
       function placesSearchCB(data, status, pagination) {
         if (status === kakao.maps.services.Status.OK) {
@@ -46,7 +53,6 @@ const MainContainer = () => {
           map: map,
           position: new kakao.maps.LatLng(place.y, place.x),
         });
-
         // 마커에 클릭이벤트를 등록합니다
         kakao.maps.event.addListener(marker, "click", function () {
           // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
@@ -58,6 +64,30 @@ const MainContainer = () => {
           infowindow.open(map, marker);
         });
       }
+
+      kakao.maps.event.addListener(map, "click", function (mouseEvent) {
+        searchDetailAddrFromCoords(
+          mouseEvent.latLng,
+          function (result, status) {
+            if (status === kakao.maps.services.Status.OK) {
+              console.log(result[0].address.address_name);
+              let content = result[0].address.address_name;
+              // 마커를 클릭한 위치에 표시합니다
+              marker.setPosition(mouseEvent.latLng);
+              marker.setMap(map);
+
+              // 인포윈도우에 클릭한 위치에 대한 법정동 상세 주소정보를 표시합니다
+              infowindow.setContent(content);
+              infowindow.open(map, marker);
+            }
+          }
+        );
+      });
+
+      function searchDetailAddrFromCoords(coords, callback) {
+        // 좌표로 법정동 상세 주소 정보를 요청합니다
+        geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
+      }
     }
   }, [place]);
 
@@ -65,5 +95,3 @@ const MainContainer = () => {
 };
 
 export default MainContainer;
-
-

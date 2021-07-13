@@ -1,6 +1,4 @@
 import classNames from "classnames";
-import Info from "components/Info/Info";
-import { useState } from "react";
 import { useRecoilState } from "recoil";
 import { isClickCardState } from "recoil/mapAtom";
 

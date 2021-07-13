@@ -9,23 +9,17 @@ const style = require("./Info.scss");
 const cx = classNames.bind(style);
 
 const Info = () => {
-  const el = useRef();
   const [isClick, setIsClick] = useRecoilState(isClickCardState);
   const [star, setStar] = useState("5.0");
   const [review, setReview] = useState("");
-
-  const onCloseModal = (e) => {
-    if (isClick && (!el.current || !el.current.contains(e.target)))
-      setIsClick(false);
+  const onClickClose = () => {
+    setIsClick(false);
   };
-
-  useEffect(() => {
-    window.addEventListener("click", onCloseModal);
-    return () => window.removeEventListener("click", onCloseModal);
-  }, []);
-
   return (
-    <div className={cx("Info")} ref={el} >
+    <div className={cx("Info")}>
+      <div className={cx("Info-Close")} onClick={onClickClose}>
+        ❌
+      </div>
       <div className={cx("Info-Image")}>
         <img src={img} alt="이미지" />
       </div>
