@@ -1,6 +1,7 @@
 import classNames from "classnames";
 import phoneIcon from "asset/phoneIcon.svg";
 import DescIcon from "asset/DescIcon.svg";
+import xBtn from "asset/xButton.svg";
 import { isClickCardState, postInfoState } from "recoil/mapAtom";
 import { useRecoilState, useRecoilValue } from "recoil";
 import Comment from "components/Comment";
@@ -67,7 +68,7 @@ const Info = () => {
   return (
     <div className={cx("Info")}>
       <div className={cx("Info-Close")} onClick={onClickClose}>
-        ❌
+        <img src={xBtn} alt="x" />
       </div>
       <div className={cx("Info-Title")}>{postInfo.name}</div>
       <div className={cx("Info-Image")}>

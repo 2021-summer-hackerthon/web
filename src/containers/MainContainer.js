@@ -3,7 +3,7 @@ import Main from "components/Main/Main";
 import { GETSTARPOSTS } from "lib/api/postAPI";
 import { GETPROFILE } from "lib/api/profileAPI";
 import { getToken } from "lib/getToken";
-import React, { memo, useCallback, useEffect, useState } from "react";
+import React, { memo, useCallback, useEffect, useRef, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import {
   allStarPostsState,
@@ -21,6 +21,7 @@ const MainContainer = () => {
   const [profile, setProfile] = useRecoilState(profileState);
   const [MARKER, setMarker] = useRecoilState(postsMarkerState);
   const [markerAddress, setMarkerAddress] = useRecoilState(clickAddressState);
+  const [MAP, setMAP] = useRecoilState(mapState);
 
   const setPostsMarkers = async () => {
     try {
@@ -64,10 +65,6 @@ const MainContainer = () => {
     checkLogin();
     setPostsMarkers();
   }, []);
-
-  useEffect(() => {
-    console.log(markerAddress);
-  }, [markerAddress]);
 
   useEffect(() => {
     let container = document.getElementById("map");
@@ -172,7 +169,8 @@ const MainContainer = () => {
     }
   }, [place, MARKER]);
 
-  return <Main isLogin={isLogin} />;
+  return <Main />;
 };
 
 export default MainContainer;
+
