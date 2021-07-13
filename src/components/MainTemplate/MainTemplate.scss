@@ -13,6 +13,7 @@
   }
 
   &-thumb {
+    transition: 0.2s;
     position: absolute;
     width: 80px;
     height: 80px;
@@ -26,7 +27,9 @@
     align-items: center;
     line-height: 80px;
     cursor: pointer;
-
+    &:hover{
+      box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    }
     &-svg {
       width: 40px;
       height: 40px;
