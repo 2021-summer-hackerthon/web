@@ -60,8 +60,8 @@ const CardItem = ({
           backgroundPosition: "center",
         }}
       >
-        <div className={cx("CardItem-Content-Title")}>{name}</div>
         <div className={cx("CardItem-Content-Footer")}>
+        <div className={cx("CardItem-Content-Footer-Title")}>{name}</div>
           <div className={cx("CardItem-Content-Footer-StarStandard")}>/5</div>
           <div className={cx("CardItem-Content-Footer-Star")}>
             {star ? star.toFixed(2) : 0}
