@@ -1,9 +1,9 @@
 export const getToken = () => {
   let token = false;
 
-  const session = sessionStorage.getItem("token");
-  
-  if(session) {
+  const session = localStorage.getItem("token");
+
+  if (session) {
     token = true;
   }
 

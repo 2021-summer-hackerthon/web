@@ -1,18 +1,40 @@
 /*global kakao */
 import Main from "components/Main/Main";
+import { GETPROFILE } from "lib/api/profileAPI";
 import { getToken } from "lib/getToken";
 import React, { memo, useCallback, useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { isLoginState, placeState } from "recoil/mapAtom";
+import { profileState } from "recoil/profileAtom";
 
 const MainContainer = () => {
   const place = useRecoilValue(placeState);
   const [isLogin, setIsLogin] = useRecoilState(isLoginState);
+  const [profile, setProfile] = useRecoilState(profileState);
 
-  useEffect(() => {
-    if (getToken()) {
+  const checkLogin = async () => {
+
+    if (!getToken()) {
+
+      setIsLogin(false);
+      return;
+    }
+
+    try {
+      const { data } = await GETPROFILE();
+
+      setProfile(data.profileImage);
+
+      setIsLogin(true);
+    } catch (err) {
+
+      localStorage.removeItem('token');
       setIsLogin(false);
     }
+  }
+
+  useEffect(() => {
+    checkLogin();
   }, []);
 
   useEffect(() => {

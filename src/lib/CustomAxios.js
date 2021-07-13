@@ -1,8 +1,9 @@
 import axios from 'axios';
+import { SERVER } from '../config/config.json'
 
 export const customAxios = axios.create({
   baseURL: `${SERVER}`, // default config
   headers: {
-    access_token: sessionStorage.getItem('token'),
+    "access-token": localStorage.getItem('token'),
   },
 });
