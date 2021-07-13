@@ -166,7 +166,7 @@ const Info = () => {
               comment={v.comment}
               anonymous={v.anonymous}
               star={v.star}
-              data={v.data}
+              user={v.user}
             />
           );
         })
