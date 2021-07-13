@@ -7,7 +7,8 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import Comment from "components/Comment";
 import { useEffect, useRef, useState } from "react";
 import FadeIn from "react-fade-in";
-import { ADDCOMMENT } from "lib/api/postAPI";
+import Swal from "sweetalert2";
+import { ADDCOMMENT, GETPOSTINFO } from "lib/api/postAPI";
 import { getToken } from "lib/getToken";
 
 const style = require("./Info.scss");
@@ -28,6 +29,17 @@ const Info = () => {
     setIsClick(false);
   };
 
+  const getPostInfo = async () => {
+    try {
+      const data = await GETPOSTINFO(postInfo.idx);
+      if (data.status === 200) {
+        setPostInfo(data.data);
+      }
+    } catch (e) {
+      throw e;
+    }
+  };
+
   const addComment = async () => {
     try {
       const dto = {
@@ -41,7 +53,12 @@ const Info = () => {
 
       const data = await ADDCOMMENT(dto);
       if (data.status === 200) {
-        window.location.reload();
+        await Swal.fire({
+          title: "성공",
+          text: "리뷰 작성에 성공했어요",
+          icon: "success",
+        });
+        await getPostInfo();
       }
     } catch (e) {
       throw e;
@@ -50,13 +67,21 @@ const Info = () => {
 
   const onEnterReview = (e) => {
     if (e.key === "Enter") {
-      if (e.target.value.length === 0) {
-        alert("내용을 입력해주세요");
+      if (getToken() === false) {
+        Swal.fire({
+          title: "잠시만요",
+          text: "로그인 해주세요",
+          icon: "error",
+        });
         return;
       }
 
-      if (getToken() === false) {
-        alert("로그인 해주세요");
+      if (e.target.value.length === 0) {
+        Swal.fire({
+          title: "잠시만요",
+          text: "내용을 채워주세요.",
+          icon: "error",
+        });
         return;
       }
 

@@ -9,7 +9,6 @@ import { isClickCardState } from "recoil/mapAtom";
 import thumb from "../../asset/thumb.svg";
 import { isModalState } from "recoil/modalAtom";
 import ModalComponent from "components/Modal/Modal.component";
-import FadeIn from "react-fade-in";
 
 const style = require("./MainTemplate.scss");
 const cx = classNames.bind(style);

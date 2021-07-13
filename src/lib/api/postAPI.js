@@ -34,3 +34,10 @@ export const ADDCOMMENT = async (a) => {
   console.log(data);
   return data;
 };
+
+export const GETPOSTINFO = async (idx) => {
+  const url = `/hotplace/${idx}`;
+  const { data } = await customAxios.get(url);
+  console.log(data);
+  return data;
+}
