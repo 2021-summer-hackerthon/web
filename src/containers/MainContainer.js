@@ -13,12 +13,16 @@ import {
   placeState,
   postsMarkerState,
 } from "recoil/mapAtom";
-import { profileState } from "recoil/profileAtom";
+import { myGradeState, myNameState, myNumberState, myRoomState, profileState } from "recoil/profileAtom";
 
 const MainContainer = () => {
   const place = useRecoilValue(placeState);
   const [isLogin, setIsLogin] = useRecoilState(isLoginState);
   const [profile, setProfile] = useRecoilState(profileState);
+  const [username, setUsername] = useRecoilState(myNameState);
+  const [myGrade, setMyGrade] = useRecoilState(myGradeState);
+  const [myRoom, setMyRoom] = useRecoilState(myRoomState);
+  const [myNumber, setMyNumber] = useRecoilState(myNumberState);
   const [MARKER, setMarker] = useRecoilState(postsMarkerState);
   const [markerAddress, setMarkerAddress] = useRecoilState(clickAddressState);
   const [MAP, setMAP] = useRecoilState(mapState);
@@ -54,6 +58,10 @@ const MainContainer = () => {
       const { data } = await GETPROFILE();
 
       setProfile(data.profileImage);
+      setUsername(data.name);
+      setMyGrade(data.grade);
+      setMyRoom(data.room);
+      setMyNumber(data.number);
       setIsLogin(true);
     } catch (err) {
       localStorage.removeItem("token");
