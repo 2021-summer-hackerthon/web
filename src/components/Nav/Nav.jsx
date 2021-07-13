@@ -1,5 +1,5 @@
 import { memo, useEffect, useState } from "react";
-import searchImg from "asset/searchInput.svg";
+import MainLogo from "asset/MainLogo.svg";
 import classNames from "classnames";
 
 const style = require("./Nav.scss");
@@ -14,14 +14,10 @@ const Nav = () => {
 
   return (
     <div className={cx("Nav")}>
-      <div className={cx("Nav-Logo")}></div>
-      <div className={cx("Nav-Search")}>
-        <input
-          className={cx("Nav-Search-Input")}
-          placeholder="음식점을 검색해주세요"
-          onChange={onChangeSearch}
-        />
+      <div className={cx("Nav-Logo")}>
+        <img src={MainLogo} alt="메인로고" />
       </div>
+
       {isLogin ? (
         <div className={cx("Nav-Profile")}></div>
       ) : (
@@ -34,6 +30,13 @@ const Nav = () => {
           </a>
         </div>
       )}
+      <div className={cx("Nav-Search")}>
+        <input
+          className={cx("Nav-Search-Input")}
+          placeholder="음식점을 검색해주세요"
+          onChange={onChangeSearch}
+        />
+      </div>
     </div>
   );
 };
