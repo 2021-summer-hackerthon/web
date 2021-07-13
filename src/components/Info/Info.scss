@@ -122,17 +122,20 @@
     margin-top: 16px;
     &-TitleWrap {
       width: 100%;
-      height: auto;
+      height: 30px;
+      line-height: 30px;
       padding: 0px 6px;
+      justify-content: center;
+      text-align: center;
+      align-items: center;
+
       &-Profile {
         display: inline-block;
         float: left;
         font-weight: bold;
       }
       &-Star {
-        width: 80px;
-        float: right;
-        display: inline-block;
+
       }
       &-Anonymous {
         display: flex;

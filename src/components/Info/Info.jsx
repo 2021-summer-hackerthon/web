@@ -2,6 +2,8 @@ import classNames from "classnames";
 import phoneIcon from "asset/phoneIcon.svg";
 import DescIcon from "asset/DescIcon.svg";
 import xBtn from "asset/xButton.svg";
+import { Rate } from "antd";
+import "antd/dist/antd.css";
 import { isClickCardState, postInfoState } from "recoil/mapAtom";
 import { useRecoilState, useRecoilValue } from "recoil";
 import Comment from "components/Comment";
@@ -47,7 +49,7 @@ const Info = () => {
         data: {
           comment: review,
           anonymous,
-          star: parseInt(star),
+          star: parseFloat(star),
         },
       };
 
@@ -137,23 +139,15 @@ const Info = () => {
       <div className={cx("Info-Input")}>
         <div className={cx("Info-Input-TitleWrap")}>
           <div className={cx("Info-Input-TitleWrap-Profile")}>2209 손민재</div>
-          <select
+          <Rate
             className={cx("Info-Input-TitleWrap-Star")}
+            allowHalf
+            value={parseFloat(star)}
             onChange={(e) => {
-              setStar(e.target.value);
+              let str = e.toString();
+              setStar(str);
             }}
-          >
-            <option defaultValue="5.0">5.0</option>
-            <option value="4.5">4.5</option>
-            <option value="4.0">4.0</option>
-            <option value="3.5">3.5</option>
-            <option value="3.0">3.0</option>
-            <option value="2.5">2.5</option>
-            <option value="2.0">2.0</option>
-            <option value="1.5">1.5</option>
-            <option value="1.0">1.0</option>
-            <option value="0.5">0.5</option>
-          </select>
+          />
           <div className={cx("Info-Input-TitleWrap-Anonymous")}>
             <input
               type="checkbox"
