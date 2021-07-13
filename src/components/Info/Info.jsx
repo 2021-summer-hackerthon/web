@@ -2,13 +2,19 @@ import classNames from "classnames";
 import phoneIcon from "asset/phoneIcon.svg";
 import DescIcon from "asset/DescIcon.svg";
 import xBtn from "asset/xButton.svg";
-import { isClickCardState, postInfoState } from "recoil/mapAtom";
+import {
+  allCommentPostsState,
+  allRecentPostsState,
+  allStarPostsState,
+  isClickCardState,
+  postInfoState,
+} from "recoil/mapAtom";
 import { useRecoilState, useRecoilValue } from "recoil";
 import Comment from "components/Comment";
 import { useEffect, useRef, useState } from "react";
 import FadeIn from "react-fade-in";
 import Swal from "sweetalert2";
-import { ADDCOMMENT, GETPOSTINFO } from "lib/api/postAPI";
+import { ADDCOMMENT, GETCOMMENTPOSTS, GETPOSTINFO, GETRECENTPOSTS, GETSTARPOSTS } from "lib/api/postAPI";
 import { getToken } from "lib/getToken";
 import {
   myGradeState,
@@ -32,7 +38,44 @@ const Info = () => {
   const [myGrade, setMyGrade] = useRecoilState(myGradeState);
   const [myRoom, setMyRoom] = useRecoilState(myRoomState);
   const [myNumber, setMyNumber] = useRecoilState(myNumberState);
+  const [allStarPosts, setAllStarPosts] = useRecoilState(allStarPostsState);
+  const [allCommentPosts, setAllCommentPosts] =
+    useRecoilState(allCommentPostsState);
+  const [allRecentPosts, setAllRecentPosts] =
+    useRecoilState(allRecentPostsState);
 
+  const getAllStarPosts = async () => {
+    try {
+      const data = await GETSTARPOSTS();
+      if (data.status === 200) {
+        setAllStarPosts(data.data);
+      }
+    } catch (e) {
+      throw e;
+    }
+  };
+
+  const getAllCommentPosts = async () => {
+    try {
+      const data = await GETCOMMENTPOSTS();
+      if (data.status === 200) {
+        setAllCommentPosts(data.data);
+      }
+    } catch (e) {
+      throw e;
+    }
+  };
+
+  const getAllRecentPosts = async () => {
+    try {
+      const data = await GETRECENTPOSTS();
+      if (data.status === 200) {
+        setAllRecentPosts(data.data);
+      }
+    } catch (e) {
+      throw e;
+    }
+  };
   const onClickAnonymous = () => {
     setAnonymous((anonymous) => !anonymous);
   };
@@ -52,6 +95,10 @@ const Info = () => {
     }
   };
 
+  useEffect(() => {
+    getPostInfo();
+  }, []);
+
   const addComment = async () => {
     try {
       const dto = {
@@ -70,6 +117,9 @@ const Info = () => {
           text: "리뷰 작성에 성공했어요",
           icon: "success",
         });
+        await getAllStarPosts();
+        await getAllCommentPosts();
+        await getAllRecentPosts();
         await getPostInfo();
       }
     } catch (e) {
