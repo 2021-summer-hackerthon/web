@@ -1,4 +1,5 @@
 import { memo, useEffect, useState } from "react";
+import searchImg from "asset/searchInput.svg";
 import classNames from "classnames";
 
 const style = require("./Nav.scss");
@@ -20,13 +21,17 @@ const Nav = () => {
           placeholder="음식점을 검색해주세요"
           onChange={onChangeSearch}
         />
-        <div className={cx("Nav-Search-Logo")}>대충로고</div>
       </div>
       {isLogin ? (
         <div className={cx("Nav-Profile")}></div>
       ) : (
         <div className={cx("Nav-Dodam")}>
-          도담도담 로그인
+          <a
+            href="http://dauth.b1nd.com/login?clientId=35340c9845dc45aeafee3a3584018ca4312cb5b724d14fefaa95a8dbd9d97d2a&redirectUrl=http://localhost:3000/callback"
+            target="_blank"
+          >
+            도담도담 로그인
+          </a>
         </div>
       )}
     </div>
