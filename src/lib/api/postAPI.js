@@ -55,3 +55,10 @@ export const GETPOSTINFO = async (idx) => {
   console.log(data);
   return data;
 }
+
+export const DELETECOMMENT = async(idx) => {
+  const url = `/comment/${idx}`;
+  const { data } = await customAxios.delete(url);
+  console.log(data);
+  return data;
+}
