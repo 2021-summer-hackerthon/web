@@ -14,6 +14,7 @@
   text-align: center;
   align-items: center;
   padding: 0px 26px;
+
   &-Close {
     margin-top: 8px;
     display: inline-block;
@@ -49,6 +50,20 @@
         width: 80px;
         float: right;
         display: inline-block;
+      }
+      &-Anonymous {
+        display: flex;
+        float: right;
+        margin-right: 8px;
+        &-Input {
+          width: 16px;
+          height: 16px;
+          margin-right: 4px;
+          line-height: 16px;
+        }
+        &-Title {
+
+        }
       }
     }
     
