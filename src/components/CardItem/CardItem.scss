@@ -1,0 +1,60 @@
+.CardItem {
+  margin-top: 12px;
+  display: inline-block;
+  min-width: 400px;
+  max-width: 400px;
+  width: 100%;
+  min-height: 200px;
+  max-height: 200px;
+  height: 100%;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  &-Content {
+    display: inline-block;
+    min-width: 330px;
+    max-width: 330px;
+    width: 100%;
+    min-height: 182px;
+    max-height: 182px;
+    height: 100%;
+    margin-top: 8px;
+    background-image: url("../../asset/defaultCardImg.svg");
+
+    &-Title {
+      margin: 4px 4px;
+      font-size: 1.25rem;
+      color: white;
+      text-align: left;
+    }
+    &-Footer {
+      margin-top: 101px;
+      width: 100%;
+      min-height: 50px;
+      max-height: 50px;
+      height: 100%;
+      display: block;
+      background-color: rgba(193, 188, 179, 0.6);
+      padding: 6px 8px;
+      &-StarLogo {
+        display: inline-block;
+        font-size: 1.5rem;
+        color: #d01212;
+        float: right;
+        margin-right: 4px;
+      }
+      &-Star {
+        display: inline-block;
+        font-size: 1.5rem;
+        float: right;
+      }
+      &-StarStandard {
+        color: black;
+        display: inline-block;
+        font-size: 1.5rem;
+        float: right;
+      }
+    }
+  }
+}
