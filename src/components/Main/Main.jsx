@@ -13,4 +13,4 @@ const Main = () => {
   );
 };
 
-export default memo(Main);
+export default Main;
