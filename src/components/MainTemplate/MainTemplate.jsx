@@ -8,6 +8,7 @@ import { useRecoilState } from "recoil";
 import { isClickCardState } from "recoil/mapAtom";
 import thumb from '../../asset/thumb.svg';
 import { isModalState } from "recoil/modalAtom";
+import ModalComponent from "components/Modal/Modal.component";
 
 const style = require("./MainTemplate.scss");
 const cx = classNames.bind(style);
@@ -23,6 +24,7 @@ const MainTemplate = () => {
 
   return (
     <div className={cx("AppWrapper")}>
+      {isModal && <ModalComponent />}
       <div className={cx("AppWrapper-thumb")} onClick={modalOpen} >
         <img src={thumb} className={cx("AppWrapper-thumb-svg")} />
       </div>
