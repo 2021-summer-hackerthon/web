@@ -84,6 +84,7 @@ const MainContainer = () => {
         position: map.getCenter(),
       });
 
+      console.log(MARKER);
       for (let i = 0; i < MARKER.length; i++) {
         setMark(MARKER[i]);
       }
@@ -105,9 +106,10 @@ const MainContainer = () => {
       }
 
       function setMark(data) {
+        console.log(data);
         let marker = new kakao.maps.Marker({
           map: map,
-          position: new kakao.maps.LatLng(data.x, data.y),
+          position: new kakao.maps.LatLng(data.y, data.x),
         });
 
         kakao.maps.event.addListener(marker, "click", function () {
@@ -173,4 +175,3 @@ const MainContainer = () => {
 };
 
 export default MainContainer;
-
