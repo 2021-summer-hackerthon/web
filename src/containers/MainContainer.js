@@ -1,21 +1,49 @@
 /*global kakao */
 import Main from "components/Main/Main";
+import { GETSTARPOSTS } from "lib/api/postAPI";
 import { GETPROFILE } from "lib/api/profileAPI";
 import { getToken } from "lib/getToken";
 import React, { memo, useCallback, useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { isLoginState, placeState } from "recoil/mapAtom";
+import {
+  allStarPostsState,
+  isLoginState,
+  mapState,
+  placeState,
+  postsMarkerState,
+} from "recoil/mapAtom";
 import { profileState } from "recoil/profileAtom";
 
 const MainContainer = () => {
   const place = useRecoilValue(placeState);
   const [isLogin, setIsLogin] = useRecoilState(isLoginState);
   const [profile, setProfile] = useRecoilState(profileState);
+  const [MARKER, setMarker] = useRecoilState(postsMarkerState);
+  const [mapAtom, setMapAtom] = useRecoilState(mapState);
+
+  const setPostsMarkers = async () => {
+    try {
+      const data = await GETSTARPOSTS();
+      if (data.status === 200) {
+        let t = [];
+        data.data.map((v) => {
+          console.log(v);
+          let dto = {
+            title: v.name,
+            x: v.xPosition,
+            y: v.yPosition,
+          };
+          t.push(dto);
+        });
+        setMarker(t);
+      }
+    } catch (e) {
+      throw e;
+    }
+  };
 
   const checkLogin = async () => {
-
     if (!getToken()) {
-
       setIsLogin(false);
       return;
     }
@@ -24,17 +52,16 @@ const MainContainer = () => {
       const { data } = await GETPROFILE();
 
       setProfile(data.profileImage);
-
       setIsLogin(true);
     } catch (err) {
-
-      localStorage.removeItem('token');
+      localStorage.removeItem("token");
       setIsLogin(false);
     }
-  }
+  };
 
   useEffect(() => {
     checkLogin();
+    setPostsMarkers();
   }, []);
 
   useEffect(() => {
@@ -48,25 +75,46 @@ const MainContainer = () => {
       let infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
       const ps = new kakao.maps.services.Places();
       ps.keywordSearch(place, placesSearchCB);
-      var marker = new kakao.maps.Marker({
+
+      let marker = new kakao.maps.Marker({
         // 지도 중심좌표에 마커를 생성합니다
+        map: map,
         position: map.getCenter(),
       });
+
+      for (let i = 0; i < MARKER.length; i++) {
+        setMark(MARKER[i]);
+      }
+
       // 지도에 마커를 표시합니다
-      marker.setMap(map);
+
       var geocoder = new kakao.maps.services.Geocoder();
 
       function placesSearchCB(data, status, pagination) {
         if (status === kakao.maps.services.Status.OK) {
           let bounds = new kakao.maps.LatLngBounds();
-
           for (let i = 0; i < data.length; i++) {
             displayMarker(data[i]);
             bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
           }
-          console.log(map);
+
           map.setBounds(bounds);
         }
+      }
+
+      function setMark(data) {
+        let marker = new kakao.maps.Marker({
+          map: map,
+          position: new kakao.maps.LatLng(data.x, data.y),
+        });
+
+        kakao.maps.event.addListener(marker, "click", function () {
+          // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
+
+          let content = `<div class="marker"> <div class='marker-title'>${data.title}</div> </div>`;
+          infowindow.setContent(content);
+          infowindow.open(map, marker);
+        });
       }
 
       function displayMarker(place) {
@@ -75,6 +123,7 @@ const MainContainer = () => {
           map: map,
           position: new kakao.maps.LatLng(place.y, place.x),
         });
+        console.log(marker);
 
         // 마커에 클릭이벤트를 등록합니다
         kakao.maps.event.addListener(marker, "click", function () {
@@ -109,7 +158,7 @@ const MainContainer = () => {
         geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
       }
     }
-  }, [place]);
+  }, [place, MARKER]);
 
   return <Main isLogin={isLogin} />;
 };

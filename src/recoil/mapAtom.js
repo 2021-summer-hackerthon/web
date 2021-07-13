@@ -44,3 +44,13 @@ export const postInfoState = atom({
   key: "postInfoState",
   default: {},
 });
+
+export const postsMarkerState = atom({
+  key: "postsMarKerState",
+  default: [],
+});
+
+export const mapState = atom({
+  key: "mapState",
+  default: {},
+});

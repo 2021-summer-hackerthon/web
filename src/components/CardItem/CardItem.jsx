@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import { useEffect } from "react";
 import { useRecoilState } from "recoil";
-import { isClickCardState, postInfoState } from "recoil/mapAtom";
+import { isClickCardState, mapState, postInfoState } from "recoil/mapAtom";
 
 const style = require("./CardItem.scss");
 const cx = classNames.bind(style);
@@ -20,6 +20,7 @@ const CardItem = ({
 }) => {
   const [isClick, setIsClick] = useRecoilState(isClickCardState);
   const [postInfo, setPostInfo] = useRecoilState(postInfoState);
+  const [mapAtom, setMapAtom] = useRecoilState(mapState);
   const data = {
     idx,
     name,

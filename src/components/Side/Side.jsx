@@ -29,7 +29,6 @@ const Side = ({ getAllStarPosts, getAllCommentPosts, getAllRecentPosts }) => {
   const categorySwitch = () => {
     switch (category) {
       case 0:
-        console.log("0");
         return allRecentPosts.map((v) => {
           return (
             <CardItem
@@ -48,7 +47,6 @@ const Side = ({ getAllStarPosts, getAllCommentPosts, getAllRecentPosts }) => {
           );
         });
       case 1:
-        console.log("1");
         return allCommentPosts.map((v) => {
           return (
             <CardItem
@@ -67,7 +65,6 @@ const Side = ({ getAllStarPosts, getAllCommentPosts, getAllRecentPosts }) => {
           );
         });
       default:
-        console.log("2");
         return allStarPosts.map((v) => {
           return (
             <CardItem
