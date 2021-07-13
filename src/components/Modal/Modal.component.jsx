@@ -2,7 +2,7 @@ import classNames from "classnames";
 import MainContainer from "containers/MainContainer";
 import makePhoneNumber from "lib/makePhoneNumber";
 import { useRecoilState } from "recoil";
-import { clickAddressState, mapState } from "recoil/mapAtom";
+import { allCommentPostsState, allRecentPostsState, allStarPostsState, clickAddressState, mapState } from "recoil/mapAtom";
 import {
   isModalState,
   modalDescriptState,
@@ -12,7 +12,7 @@ import {
 } from "recoil/modalAtom";
 import xButton from "../../asset/xButton.svg";
 import camera from "../../asset/camera.svg";
-import { ADDPOST, UPLOADIMAGE } from "lib/api/postAPI";
+import { ADDPOST, GETCOMMENTPOSTS, GETRECENTPOSTS, GETSTARPOSTS, UPLOADIMAGE } from "lib/api/postAPI";
 import Swal from "sweetalert2";
 import { getToken } from "lib/getToken";
 
@@ -26,6 +26,44 @@ const ModalComponent = () => {
   const [modalPhone, setModalPhone] = useRecoilState(modalPhoneState);
   const [address, setAddress] = useRecoilState(clickAddressState);
   const [image, setImage] = useRecoilState(modalImageState);
+  const [allStarPosts, setAllStarPosts] = useRecoilState(allStarPostsState);
+  const [allCommentPosts, setAllCommentPosts] =
+    useRecoilState(allCommentPostsState);
+  const [allRecentPosts, setAllRecentPosts] =
+    useRecoilState(allRecentPostsState);
+
+  const getAllStarPosts = async () => {
+    try {
+      const data = await GETSTARPOSTS();
+      if (data.status === 200) {
+        setAllStarPosts(data.data);
+      }
+    } catch (e) {
+      throw e;
+    }
+  };
+
+  const getAllCommentPosts = async () => {
+    try {
+      const data = await GETCOMMENTPOSTS();
+      if (data.status === 200) {
+        setAllCommentPosts(data.data);
+      }
+    } catch (e) {
+      throw e;
+    }
+  };
+
+  const getAllRecentPosts = async () => {
+    try {
+      const data = await GETRECENTPOSTS();
+      if (data.status === 200) {
+        setAllRecentPosts(data.data);
+      }
+    } catch (e) {
+      throw e;
+    }
+  };
 
   const uploadImage = async (e) => {
     const file = e.target.files[0];
@@ -76,6 +114,9 @@ const ModalComponent = () => {
           text: "맛집을 생성했어요",
           icon: "success",
         });
+        getAllCommentPosts();
+        getAllRecentPosts();
+        getAllStarPosts();
       }
     } catch (err) {
       throw err;
