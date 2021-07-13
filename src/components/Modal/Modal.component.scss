@@ -106,4 +106,14 @@
     width: 888px;
     height: 400px;
   }
+
+  &-camera {
+    position: relative;
+    top: 275px;
+    left: 345px;
+    float: right;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+  }
 }
