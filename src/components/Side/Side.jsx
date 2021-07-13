@@ -8,6 +8,12 @@ const Side = () => {
   return (
     <div className={cx('Side')}>
       <CardItem />
+      <CardItem />
+      <CardItem />
+      <CardItem />
+      <CardItem />
+      <CardItem />
+      <CardItem />
     </div>
   );
 }

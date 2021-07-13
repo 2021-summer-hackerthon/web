@@ -14,3 +14,8 @@ export const isLoginState = atom({
   key:'isLoginState',
   default: false
 });
+
+export const isClickCardState = atom({
+  key: 'isClickCardState',
+  default: false,
+});
