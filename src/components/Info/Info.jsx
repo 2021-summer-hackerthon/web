@@ -5,6 +5,8 @@ import { isClickCardState, postInfoState } from "recoil/mapAtom";
 import { useRecoilState, useRecoilValue } from "recoil";
 import Comment from "components/Comment";
 import { useEffect, useRef, useState } from "react";
+import { ADDCOMMENT } from "lib/api/postAPI";
+import { getToken } from "lib/getToken";
 
 const style = require("./Info.scss");
 const cx = classNames.bind(style);
@@ -24,6 +26,43 @@ const Info = () => {
     setIsClick(false);
   };
 
+  const addComment = async () => {
+    try {
+      const dto = {
+        idx: postInfo.idx,
+        data: {
+          comment: review,
+          anonymous,
+          star: parseInt(star),
+        },
+      };
+
+      const data = await ADDCOMMENT(dto);
+      if (data.status === 200) {
+        window.location.reload();
+      }
+    } catch (e) {
+      throw e;
+    }
+  };
+
+  const onEnterReview = (e) => {
+    if (e.key === "Enter") {
+      if (e.target.value.length === 0) {
+        alert("내용을 입력해주세요");
+        return;
+      }
+
+      if (getToken() === false) {
+        alert("로그인 해주세요");
+        return;
+      }
+
+      addComment();
+      setReview("");
+    }
+  };
+
   console.log(postInfo);
   return (
     <div className={cx("Info")}>
@@ -37,12 +76,13 @@ const Info = () => {
 
       <div className={cx("Info-Content")}>
         <div className={cx("Info-Content-Top")}>
-          <div className={cx("Info-Content-Top-StarStandard")}>/5</div>
-          <div className={cx("Info-Content-Top-Star")}>
-            {postInfo.star ? postInfo.star : 0}
-          </div>
           <div className={cx("Info-Content-Top-StarLogo")}>★</div>
+          <div className={cx("Info-Content-Top-Star")}>
+            {postInfo.star ? postInfo.star.toFixed(2) : 0}
+          </div>
+          <div className={cx("Info-Content-Top-StarStandard")}>/5</div>
         </div>
+
         <div className={cx("Info-Content-Mid")}>
           <div className={cx("Info-Content-Mid-Phone")}>
             <img
@@ -50,15 +90,19 @@ const Info = () => {
               src={phoneIcon}
               alt="폰"
             />
-            {postInfo.phone ? postInfo.phone : "휴대전화번호가 없습니다"}
+            <div className={cx("Info-Content-Mid-Phone-Content")}>
+              {postInfo.phone ? postInfo.phone : "휴대전화번호가 없습니다"}
+            </div>
           </div>
-          <div className={cx("Info-Content-Mid-Address")}>
+          <div className={cx("Info-Content-Mid-Desc")}>
             <img
-              className={cx("Info-Content-Mid-Address-Icon")}
+              className={cx("Info-Content-Mid-Desc-Icon")}
               src={DescIcon}
               alt="마커"
             />
-            {postInfo.desc ? postInfo.desc : "요약 정보가 없습니다"}
+            <div className={cx("Info-Content-Mid-Desc-Content")}>
+              {postInfo.desc ? postInfo.desc : "요약 정보가 없습니다"}
+            </div>
           </div>
         </div>
       </div>
@@ -102,13 +146,22 @@ const Info = () => {
           onChange={(e) => {
             setReview(e.target.value);
           }}
+          onKeyPress={onEnterReview}
           value={review}
         />
       </div>
       <div className={cx("line")}></div>
       {postInfo.comment
         ? postInfo.comment.map((v) => {
-            return <Comment />;
+            return (
+              <Comment
+                key={v.idx}
+                idx={v.idx}
+                comment={v.comment}
+                anonymous={v.anonymous}
+                star={v.star}
+              />
+            );
           })
         : null}
     </div>
@@ -116,3 +169,6 @@ const Info = () => {
 };
 
 export default Info;
+
+// 0: {idx: 6, star: 1, comment: "ㄹㅇ ㅋㅋ", anonymous: 1}
+// 1: {idx: 7, star: 0, comment: "ㄹㅇ ㅋㅋ", anonymous: 1}

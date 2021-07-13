@@ -36,12 +36,6 @@ const CardItem = ({
     setIsClick(true);
     setPostInfo(data);
   };
-  let rate = 0.0;
-  useEffect(() => {
-    if (star !== null) {
-      rate = star;
-    }
-  }, []);
   // 서버에서 별점 이미지 이름 좌표
 
   // "idx": 7,
@@ -65,7 +59,9 @@ const CardItem = ({
         <div className={cx("CardItem-Content-Title")}>{name}</div>
         <div className={cx("CardItem-Content-Footer")}>
           <div className={cx("CardItem-Content-Footer-StarStandard")}>/5</div>
-          <div className={cx("CardItem-Content-Footer-Star")}>{rate} </div>
+          <div className={cx("CardItem-Content-Footer-Star")}>
+            {star ? star.toFixed(2) : 0}
+          </div>
           <div className={cx("CardItem-Content-Footer-StarLogo")}>★</div>
         </div>
       </div>

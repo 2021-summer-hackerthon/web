@@ -1,5 +1,10 @@
 import Side from "components/Side/Side";
-import { GETCOMMENTPOSTS, GETRECENTPOSTS, GETSTARPOSTS } from "lib/api/postAPI";
+import {
+  ADDCOMMENT,
+  GETCOMMENTPOSTS,
+  GETRECENTPOSTS,
+  GETSTARPOSTS,
+} from "lib/api/postAPI";
 import { useRecoilState } from "recoil";
 import {
   allCommentPostsState,

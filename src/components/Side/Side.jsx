@@ -33,6 +33,7 @@ const Side = ({ getAllStarPosts, getAllCommentPosts, getAllRecentPosts }) => {
         return allRecentPosts.map((v) => {
           return (
             <CardItem
+              key={v.idx}
               idx={v.idx}
               name={v.name}
               desc={v.discript}
@@ -51,6 +52,7 @@ const Side = ({ getAllStarPosts, getAllCommentPosts, getAllRecentPosts }) => {
         return allCommentPosts.map((v) => {
           return (
             <CardItem
+              key={v.idx}
               idx={v.idx}
               name={v.name}
               desc={v.discript}
@@ -69,6 +71,7 @@ const Side = ({ getAllStarPosts, getAllCommentPosts, getAllRecentPosts }) => {
         return allStarPosts.map((v) => {
           return (
             <CardItem
+              key={v.idx}
               idx={v.idx}
               name={v.name}
               desc={v.discript}
