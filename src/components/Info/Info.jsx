@@ -2,18 +2,30 @@ import classNames from "classnames";
 import img from "asset/defaultCardImg.svg";
 import { isClickCardState } from "recoil/mapAtom";
 import { useRecoilState } from "recoil";
-import { useEffect, useState } from "react";
+import Comment from "components/Comment";
+import { useEffect, useRef, useState } from "react";
 
 const style = require("./Info.scss");
 const cx = classNames.bind(style);
 
 const Info = () => {
+  const el = useRef();
   const [isClick, setIsClick] = useRecoilState(isClickCardState);
   const [star, setStar] = useState("5.0");
   const [review, setReview] = useState("");
-  const onSaveRating = (index) => setStar(index);
+
+  const onCloseModal = (e) => {
+    if (isClick && (!el.current || !el.current.contains(e.target)))
+      setIsClick(false);
+  };
+
+  useEffect(() => {
+    window.addEventListener("click", onCloseModal);
+    return () => window.removeEventListener("click", onCloseModal);
+  }, []);
+
   return (
-    <div className={cx("Info")}>
+    <div className={cx("Info")} ref={el} >
       <div className={cx("Info-Image")}>
         <img src={img} alt="이미지" />
       </div>
@@ -39,7 +51,7 @@ const Info = () => {
           </select>
         </div>
 
-        <input
+        <textarea
           className={cx("Info-Input-review")}
           type="text"
           placeholder="리뷰를 입력해주세요"
@@ -49,6 +61,14 @@ const Info = () => {
           value={review}
         />
       </div>
+      <div className={cx("line")}></div>
+      <Comment />
+      <Comment />
+      <Comment />
+      <Comment />
+      <Comment />
+      <Comment />
+      <Comment />
     </div>
   );
 };
