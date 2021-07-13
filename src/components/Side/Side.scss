@@ -8,6 +8,7 @@
   background-color: #ffeec3;
   display: flex;
   overflow-y: scroll;
+  overflow-x: hidden;
   flex-direction: column;
     &-TitleWrap {
     margin-top: 16px;
