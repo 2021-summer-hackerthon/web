@@ -8,3 +8,9 @@
   overflow-y: scroll;
   flex-direction: column;
 }
+
+@media screen and(max-width:937px) {
+  .Side {
+    display: none;
+  }
+}
