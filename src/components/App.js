@@ -1,26 +1,14 @@
-import MainContainer from "containers/MainContainer";
-import classNames from "classnames";
+import TokenContainer from "containers/TokenContainer";
+import React from "react";
+import { Switch, Route } from "react-router-dom";
 import "styles/reset.scss";
-import NavContainer from "containers/NavContainer";
-import SideContainer from "containers/SideContainer";
-import Info from "./Info/Info";
-import { useRecoilState } from "recoil";
-import { isClickCardState } from "recoil/mapAtom";
-
-const style = require("./App.scss");
-const cx = classNames.bind(style);
-
+import MainTemplate from "./MainTemplate/MainTemplate";
 const App = () => {
-  const [isClick, setIsClick] = useRecoilState(isClickCardState);
   return (
-    <div className={cx("AppWrapper")}>
-      <NavContainer />
-      <div className={cx("AppWrapper-SideWrapper")}>
-        <SideContainer />
-        {isClick ? <Info /> : null}
-        <MainContainer />
-      </div>
-    </div>
+    <Switch>
+      <Route exact path="/" render={() => <MainTemplate />} />
+      <Route path="/callback" render={() => <TokenContainer />} />
+    </Switch>
   );
 };
 

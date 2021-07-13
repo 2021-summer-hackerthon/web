@@ -1,7 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap');
+
 * {
   font-weight: medium;
   box-sizing: border-box;
-  font-family: "Noto Sans KR";
+  font-family: 'Noto Sans SC', sans-serif !important;
 }
 
 a {
@@ -30,4 +32,30 @@ body {
 
 button:focus {
   outline: none;
+}
+
+.marker {
+  font-size: 0.875rem;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  &-title {
+    word-break: keep-all;
+    padding: 6px 0px;
+    background-color: #ffcf54;
+    color: black;
+    font-weight: bold;
+    border: 3px solid #ffcf54;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+  }
+  &-desc {
+    background-color: #ffd978;
+    border: 3px solid #ffd978;
+    padding: 6px 4px;
+    word-break: keep-all;
+    color: black;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+  }
 }

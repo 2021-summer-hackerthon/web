@@ -1,7 +1,7 @@
 .Info {
   left: 400px;
   position: absolute;
-  z-index: 9999;
+  z-index: 9;
   display: inline-block;
   min-width: 400px;
   max-width: 400px;
@@ -14,9 +14,105 @@
   text-align: center;
   align-items: center;
   padding: 0px 26px;
+  &-Title {
+    font-weight: bold;
+    font-size: 1.5rem;
+    min-width: 60px;
+    max-width: 348px;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-top: 48px;
+  }
+  &-Content {
+    display: flex;
+    flex-direction: column;
+    &-Top {
+      width: 100%;
+      float: left;
+      line-height: 2rem;
+      padding-bottom: 12px;
+      border-bottom: 3px solid black;
+      vertical-align: middle;
+      text-align: center;
+      justify-content: center;
+      align-items: center;
+      color: #515151;
+      font-weight: bold;
+      &-StarStandard {
+        display: inline-block;
+        float: left;
+        font-size: 1.5rem;
+      }
+      &-Star {
+        color: black;
+        float: left;
+        display: inline-block;
+        font-size: 1.5rem;
+        margin-right: 4px;
+      }
+      &-StarLogo {
+        color: #d01212;
+        font-size: 2.5rem;
+        float: left;
+        display: inline-block;
+        margin-right: 8px;
+      }
+    }
+    &-Mid {
+      margin-top: 16px;
+      &-Phone {
+        justify-content: center;
+        text-align: center;
+        align-items: center;
+        height: 30px;
+        &-Icon {
+          margin-left: 8px;
+          float: left;
+          margin-right: 8px;
+        }
+        &-Content {
+          display: inline-block;
+          color: #515151;
+          font-weight: bold;
+          float: left;
+        }
+      }
+      &-Desc {
+        &-Icon {
+          margin-left: 8px;
+          margin-right: 8px;
+          float: left;
+          width: 20px;
+        }
+        &-Content {
+          display: inline-block;
+          color: #515151;
+          font-weight: bold;
+          float: left;
+          max-width: 310px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+      }
+    }
+  }
+
+  &-Close {
+    margin-top: 8px;
+    margin-bottom: 8px;
+    display: inline-block;
+    float: right;
+    cursor: pointer;
+    & > img {
+      display: inline-block;
+      width: 13px;
+    }
+  }
   &-Image {
     display: inline-block;
-    margin-top: 60px;
     max-width: 344px;
     min-width: 344px;
     width: 100%;
@@ -26,23 +122,39 @@
     & > img {
       width: 100%;
       height: 100%;
+      object-fit: cover;
     }
   }
   &-Input {
     margin-top: 16px;
     &-TitleWrap {
       width: 100%;
-      height: auto;
+      height: 30px;
+      line-height: 30px;
       padding: 0px 6px;
+      justify-content: center;
+      text-align: center;
+      align-items: center;
+
       &-Profile {
         display: inline-block;
         float: left;
         font-weight: bold;
       }
       &-Star {
-        width: 80px;
+      }
+      &-Anonymous {
+        display: flex;
         float: right;
-        display: inline-block;
+        margin-right: 8px;
+        &-Input {
+          width: 16px;
+          height: 16px;
+          margin-right: 4px;
+          line-height: 16px;
+        }
+        &-Title {
+        }
       }
     }
 
@@ -50,6 +162,8 @@
       margin-top: 14px;
       min-height: 88px;
       max-height: 88px;
+      min-width: 348px;
+      max-width: 348px;
       width: 100%;
       height: 100%;
       border: none;
@@ -68,4 +182,10 @@
   .Info {
     display: none;
   }
+  
+.line {
+  margin: 28px 0px;
+  width: 100%;
+  height: 4px;
+  background-color: #c2c2c2;
 }
