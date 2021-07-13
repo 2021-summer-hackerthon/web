@@ -75,12 +75,12 @@ const MainContainer = () => {
           map: map,
           position: new kakao.maps.LatLng(place.y, place.x),
         });
+
         // 마커에 클릭이벤트를 등록합니다
         kakao.maps.event.addListener(marker, "click", function () {
           // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
 
           let content = `<div class="marker"> <div class='marker-title'>${place.place_name}</div> <div class='marker-desc'>${place.address_name}</div> </div>`;
-
           infowindow.setContent(content);
           infowindow.open(map, marker);
         });
@@ -91,8 +91,7 @@ const MainContainer = () => {
           mouseEvent.latLng,
           function (result, status) {
             if (status === kakao.maps.services.Status.OK) {
-              console.log(result[0].address.address_name);
-              let content = result[0].address.address_name;
+              let content = `<div class="marker"> <div class='marker-title'>${result[0].address.address_name}</div></div>`;
               // 마커를 클릭한 위치에 표시합니다
               marker.setPosition(mouseEvent.latLng);
               marker.setMap(map);
