@@ -20,7 +20,7 @@
     min-width: 60px;
     max-width: 3380px;
     display: inline-block;
-    margin-top: 22px;
+    margin-top: 48px;
   }
   &-Content {
     display: flex;
@@ -95,9 +95,14 @@
 
   &-Close {
     margin-top: 8px;
+    margin-bottom: 8px;
     display: inline-block;
     float: right;
     cursor: pointer;
+    &>img {
+      display: inline-block;
+      width: 13px;
+    }
   }
   &-Image {
     display: inline-block;

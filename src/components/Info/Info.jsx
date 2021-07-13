@@ -6,6 +6,7 @@ import { isClickCardState, postInfoState } from "recoil/mapAtom";
 import { useRecoilState, useRecoilValue } from "recoil";
 import Comment from "components/Comment";
 import { useEffect, useRef, useState } from "react";
+import FadeIn from "react-fade-in";
 import { ADDCOMMENT } from "lib/api/postAPI";
 import { getToken } from "lib/getToken";
 
@@ -152,24 +153,23 @@ const Info = () => {
         />
       </div>
       <div className={cx("line")}></div>
-      {postInfo.comment
-        ? postInfo.comment.map((v) => {
-            return (
-              <Comment
-                key={v.idx}
-                idx={v.idx}
-                comment={v.comment}
-                anonymous={v.anonymous}
-                star={v.star}
-              />
-            );
-          })
-        : null}
+      <FadeIn delay={100}>
+        {postInfo.comment
+          ? postInfo.comment.map((v) => {
+              return (
+                <Comment
+                  key={v.idx}
+                  idx={v.idx}
+                  comment={v.comment}
+                  anonymous={v.anonymous}
+                  star={v.star}
+                />
+              );
+            })
+          : null}
+      </FadeIn>
     </div>
   );
 };
 
 export default Info;
-
-// 0: {idx: 6, star: 1, comment: "ㄹㅇ ㅋㅋ", anonymous: 1}
-// 1: {idx: 7, star: 0, comment: "ㄹㅇ ㅋㅋ", anonymous: 1}

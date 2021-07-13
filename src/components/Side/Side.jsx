@@ -1,6 +1,7 @@
 import classNames from "classnames";
 import CardItem from "components/CardItem/CardItem";
 import { useEffect } from "react";
+import FadeIn from "react-fade-in";
 import { useRecoilState } from "recoil";
 import { AllPostsCategoryState } from "recoil/mapAtom";
 import {
@@ -31,90 +32,98 @@ const Side = ({ getAllStarPosts, getAllCommentPosts, getAllRecentPosts }) => {
       case 0:
         return allRecentPosts.map((v) => {
           return (
-            <CardItem
-              key={v.idx}
-              idx={v.idx}
-              name={v.name}
-              desc={v.discript}
-              x={v.xPosition}
-              y={v.yPosition}
-              phone={v.phone}
-              image={v.image}
-              star={v.star}
-              anonymous={v.anonymous}
-              comment={v.comment}
-            />
+            <FadeIn delay={400}>
+              <CardItem
+                key={v.idx}
+                idx={v.idx}
+                name={v.name}
+                desc={v.discript}
+                x={v.xPosition}
+                y={v.yPosition}
+                phone={v.phone}
+                image={v.image}
+                star={v.star}
+                anonymous={v.anonymous}
+                comment={v.comment}
+              />
+            </FadeIn>
           );
         });
       case 1:
         return allCommentPosts.map((v) => {
           return (
-            <CardItem
-              key={v.idx}
-              idx={v.idx}
-              name={v.name}
-              desc={v.discript}
-              x={v.xPosition}
-              y={v.yPosition}
-              phone={v.phone}
-              image={v.image}
-              star={v.star}
-              anonymous={v.anonymous}
-              comment={v.comment}
-            />
+            <FadeIn delay={400}>
+              <CardItem
+                key={v.idx}
+                idx={v.idx}
+                name={v.name}
+                desc={v.discript}
+                x={v.xPosition}
+                y={v.yPosition}
+                phone={v.phone}
+                image={v.image}
+                star={v.star}
+                anonymous={v.anonymous}
+                comment={v.comment}
+              />
+            </FadeIn>
           );
         });
       default:
         return allStarPosts.map((v) => {
           return (
-            <CardItem
-              key={v.idx}
-              idx={v.idx}
-              name={v.name}
-              desc={v.discript}
-              x={v.xPosition}
-              y={v.yPosition}
-              phone={v.phone}
-              image={v.image}
-              anonymous={v.anonymous}
-              comment={v.comment}
-              star={v.star}
-            />
+            <FadeIn delay={400}>
+              <CardItem
+                key={v.idx}
+                idx={v.idx}
+                name={v.name}
+                desc={v.discript}
+                x={v.xPosition}
+                y={v.yPosition}
+                phone={v.phone}
+                image={v.image}
+                anonymous={v.anonymous}
+                comment={v.comment}
+                star={v.star}
+              />
+            </FadeIn>
           );
         });
     }
   };
 
   return (
-    <div className={cx("Side")}>
-      <div className={cx("Side-TitleWrap")}>
-        <div
-          className={cx("Side-TitleWrap-Category")}
-          onClick={() => {
-            setCategory(0);
-          }}
-        >
-          최신순
+    <FadeIn delay={400}>
+      <div className={cx("Side")}>
+        <div className={cx("Side-TitleWrap")}>
+          <div
+            className={cx("Side-TitleWrap-Category")}
+            onClick={() => {
+              setCategory(0);
+            }}
+          >
+            최신순
+          </div>
+          <div
+            className={cx("Side-TitleWrap-Category")}
+            onClick={() => {
+              setCategory(1);
+            }}
+          >
+            댓글순
+          </div>
+          <div
+            className={cx("Side-TitleWrap-Category")}
+            onClick={() => {
+              setCategory(2);
+            }}
+          >
+            평점순
+          </div>
         </div>
-        <div
-          className={cx("Side-TitleWrap-Category")}
-          onClick={() => {
-            setCategory(1);
-          }}
-        >
-          댓글순
-        </div>
-        <div
-          className={cx("Side-TitleWrap-Category")}
-          onClick={() => {
-            setCategory(2);
-          }}
-        >
-          평점순
-        </div>
+        {categorySwitch()}
       </div>
-      {categorySwitch()}
-    </div>
+    </FadeIn>
   );
 };
 
