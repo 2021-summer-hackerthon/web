@@ -54,7 +54,11 @@ const CardItem = ({
       <div
         className={cx("CardItem-Content")}
         onClick={onClickCard}
-        style={{ backgroundImage: `url(${image})` }}
+        style={{
+          backgroundImage: `url(${image})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
       >
         <div className={cx("CardItem-Content-Title")}>{name}</div>
         <div className={cx("CardItem-Content-Footer")}>
