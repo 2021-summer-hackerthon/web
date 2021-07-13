@@ -1,13 +1,20 @@
 /*global kakao */
 import Main from "components/Main/Main";
-import Nav from "components/Nav";
+import { getToken } from "lib/getToken";
 import React, { memo, useCallback, useEffect, useState } from "react";
-import { useRecoilValue } from "recoil";
-import { placeState } from "recoil/mapAtom";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { isLoginState, placeState } from "recoil/mapAtom";
 
 const MainContainer = () => {
   const place = useRecoilValue(placeState);
-  
+  const [isLogin, setIsLogin] = useRecoilState(isLoginState);
+
+  useEffect(() => {
+    if (getToken()) {
+      setIsLogin(false);
+    }
+  }, []);
+
   useEffect(() => {
     let container = document.getElementById("map");
     let options = {
@@ -54,12 +61,9 @@ const MainContainer = () => {
     }
   }, [place]);
 
-  return (
-    <>
-      <Nav />
-      <Main />
-    </>
-  );
+  return <Main isLogin={isLogin} />;
 };
 
 export default MainContainer;
+
+

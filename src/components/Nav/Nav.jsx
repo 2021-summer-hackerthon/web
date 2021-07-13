@@ -4,7 +4,7 @@ import MainLogo from "asset/MainLogo.svg";
 import DefaultProfile from "asset/DefaultProfile.svg";
 import classNames from "classnames";
 import { useRecoilState } from "recoil";
-import { mapInputState, placeState } from "recoil/mapAtom";
+import { isLoginState, mapInputState, placeState } from "recoil/mapAtom";
 
 const style = require("./Nav.scss");
 const cx = classNames.bind(style);
@@ -12,7 +12,7 @@ const cx = classNames.bind(style);
 const Nav = () => {
   const [place, setPlace] = useRecoilState(placeState);
   const [input, setInput] = useRecoilState(mapInputState);
-  let isLogin = true;
+  const [isLogin, setIsLogin] = useRecoilState(isLoginState);
 
   const onChangeInput = (e) => {
     setInput(e.target.value);
