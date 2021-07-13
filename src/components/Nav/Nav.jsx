@@ -15,6 +15,7 @@ const Nav = () => {
   const [input, setInput] = useRecoilState(mapInputState);
   const [isLogin, setIsLogin] = useRecoilState(isLoginState);
   const [profile, setProfile] = useRecoilState(profileState);
+  const [isHover, setIsHover] = useState(false);
 
   const deltoken = () => {
     localStorage.removeItem('token');
@@ -40,12 +41,19 @@ const Nav = () => {
       </div>
 
       {isLogin ? (
-        <div className={cx("Nav-Profile")} onClick={e => deltoken()} >
-          {profile === null || profile === ''
-            ? <img src={DefaultProfile} alt="프로필 이미지" />
-            : <img src={profile} alt="프로필 이미지" />
-          }
-        </div>
+        <>
+          <div className={cx("Nav-Profile")}
+            onClick={e => deltoken()}
+            onMouseEnter={() => setIsHover(true)}
+            onMouseLeave={() => setIsHover(false)}
+          >
+            {profile === null || profile === ''
+              ? <img src={DefaultProfile} alt="프로필 이미지" />
+              : <img src={profile} alt="프로필 이미지" />
+            }
+          </div>
+          {isHover && <div className={cx('Navlogout')}>로그아웃</div>}
+        </>
       ) : (
         <div className={cx("Nav-Dodam")}>
           <a
