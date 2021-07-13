@@ -3,6 +3,7 @@ import img from "asset/defaultCardImg.svg";
 import { isClickCardState } from "recoil/mapAtom";
 import { useRecoilState } from "recoil";
 import { useEffect, useState } from "react";
+
 const style = require("./Info.scss");
 const cx = classNames.bind(style);
 
@@ -10,6 +11,7 @@ const Info = () => {
   const [isClick, setIsClick] = useRecoilState(isClickCardState);
   const [star, setStar] = useState("5.0");
   const [review, setReview] = useState("");
+  const onSaveRating = (index) => setStar(index);
   return (
     <div className={cx("Info")}>
       <div className={cx("Info-Image")}>
