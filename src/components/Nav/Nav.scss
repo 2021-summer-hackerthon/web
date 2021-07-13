@@ -84,10 +84,10 @@
   }
 
   .Nav .Nav-Profile {
-      display: none;
-    }
-  
-.Nav {
+    display: none;
+  }
+
+  .Nav {
     background-color: white;
     width: 90%;
     height: 50px;
@@ -118,15 +118,15 @@
     padding: 0px;
     background-image: url(../../asset/searchInput.svg);
     background-position: 98% center;
-}
+  }
 
-.Nav .Nav-Search {
+  .Nav .Nav-Search {
     border: solid 2px #ffcf54;
     margin: 0px;
-}
-.Nav-Search-Input{
-  width : 98%;
-  padding: 0px;
-  background-position: 320px center;
+  }
+  .Nav-Search-Input {
+    width: 98%;
+    padding: 0px;
+    background-position: 98% center;
   }
 }
