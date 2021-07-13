@@ -106,18 +106,23 @@ const ModalComponent = () => {
     console.log(data);
 
     try {
-      const status = await ADDPOST(data);
-      console.log(status);
-      if (status === 201) {
-        Swal.fire({
-          title: "성공",
-          text: "맛집을 생성했어요",
-          icon: "success",
-        });
-        getAllCommentPosts();
-        getAllRecentPosts();
-        getAllStarPosts();
-      }
+      await ADDPOST(data);
+
+      Swal.fire({
+        title: "성공",
+        text: "맛집을 생성했어요",
+        icon: "success",
+      });
+
+      getAllCommentPosts();
+      getAllRecentPosts();
+      getAllStarPosts();
+
+      setModalPhone('');
+      setModalName('');
+      setModalDescript('');
+      setAddress('');
+      setImage('');
     } catch (err) {
       throw err;
     } finally {

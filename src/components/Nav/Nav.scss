@@ -79,7 +79,7 @@
   }
 }
 
-@media screen and(max-width:892px) {
+@media screen and(max-width:937px) {
   .Nav .Nav-Logo {
     display: none;
   }
@@ -109,6 +109,9 @@
   .Nav-Profile {
     display: none;
   }
+  .Nav-Dodam {
+    display: none;
+  }
   .Nav-Search {
     width: 98%;
     margin: 0px 0px;
@@ -132,6 +135,11 @@
     padding: 0px;
     background-position: 98% center;
   }
+
+  .Nav .Side {
+    display: none;
+  }
+
 }
 
 .Navlogout{
