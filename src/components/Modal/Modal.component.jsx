@@ -3,10 +3,18 @@ import MainContainer from "containers/MainContainer";
 import makePhoneNumber from "lib/makePhoneNumber";
 import { useRecoilState } from "recoil";
 import { clickAddressState, mapState } from "recoil/mapAtom";
-import { isModalState, modalDescriptState, modalImageState, modalNameState, modalPhoneState } from "recoil/modalAtom";
-import xButton from '../../asset/xButton.svg';
-import camera from '../../asset/camera.svg';
+import {
+  isModalState,
+  modalDescriptState,
+  modalImageState,
+  modalNameState,
+  modalPhoneState,
+} from "recoil/modalAtom";
+import xButton from "../../asset/xButton.svg";
+import camera from "../../asset/camera.svg";
 import { ADDPOST, UPLOADIMAGE } from "lib/api/postAPI";
+import Swal from "sweetalert2";
+import { getToken } from "lib/getToken";
 
 const style = require("./Modal.component.scss");
 const cx = classNames.bind(style);
@@ -20,12 +28,11 @@ const ModalComponent = () => {
   const [image, setImage] = useRecoilState(modalImageState);
 
   const uploadImage = async (e) => {
-
     const file = e.target.files[0];
 
     const formData = new FormData();
     console.log(file);
-    formData.append('images', file);
+    formData.append("images", file);
 
     console.log(formData);
 
@@ -34,12 +41,11 @@ const ModalComponent = () => {
 
       setImage(data.files[0]);
     } catch (err) {
-      alert('알맞지 않은 형식입니다 (jpg, jpeg, png만 업로드 가능)');
+      alert("알맞지 않은 형식입니다 (jpg, jpeg, png만 업로드 가능)");
     }
-  }
+  };
 
   const addPost = async () => {
-
     const data = {
       name: modalName,
       discript: modalDescript,
@@ -48,68 +54,100 @@ const ModalComponent = () => {
       yPosition: String(address.y),
       image,
       anonymous: true,
+    };
+
+    if (getToken() === false) {
+      Swal.fire({
+        title: "잠시만요",
+        text: "로그인 해주세요",
+        icon: "error",
+      });
+      return;
     }
 
     console.log(data);
 
     try {
-
-      await ADDPOST(data);
+      const status = await ADDPOST(data);
+      console.log(status);
+      if (status === 201) {
+        Swal.fire({
+          title: "성공",
+          text: "맛집을 생성했어요",
+          icon: "success",
+        });
+      }
     } catch (err) {
-      console.log(err);
+      throw err;
     } finally {
       setIsModal(false);
     }
-  }
+  };
 
   return (
     <>
-      <div className={cx('Modal')} />
-      <div className={cx('modalContainer')}>
-        <div className={cx('modalContainer-topText')}>
+      <div className={cx("Modal")} />
+      <div className={cx("modalContainer")}>
+        <div className={cx("modalContainer-topText")}>
           맛집을 추천해 주세요!
-          <div className={cx('modalContainer-xButton')} onClick={() => setIsModal(false)} >
-            <img src={xButton} alt='xButton' />
+          <div
+            className={cx("modalContainer-xButton")}
+            onClick={() => setIsModal(false)}
+          >
+            <img src={xButton} alt="xButton" />
           </div>
         </div>
 
-        <div className={cx('modalContainer-submit')} onClick={() => addPost()}>
+        <div className={cx("modalContainer-submit")} onClick={() => addPost()}>
           제출
         </div>
 
-        <textarea className={cx('modalContainer-descript')}
-          type='textarea'
-          placeholder='맛집을 요약해주세요'
+        <textarea
+          className={cx("modalContainer-descript")}
+          type="textarea"
+          placeholder="맛집을 요약해주세요"
           value={modalDescript}
-          onChange={e => setModalDescript(e.target.value)}
+          onChange={(e) => setModalDescript(e.target.value)}
         />
 
-        <label for='input-file'><img className={cx('modalContainer-camera')} src={camera} alt='upload' /> </label>
-        <input type="file" id="input-file" style={{ display: "none" }} onChange={e => uploadImage(e)} />
-
-        <div className={cx('modalContainer-Input')} >
-          맛집 이름
-        </div>
-        <input className={cx('modalContainer-Input-box')} value={modalName} onChange={e => setModalName(e.target.value)} />
-
-        <div className={cx('modalContainer-call')} >
-          맛집 전화번호
-        </div>
-        <input className={cx('modalContainer-call-input')} value={modalPhone} onChange={e => setModalPhone(makePhoneNumber(e.target.value))} />
-
-        <div className={cx('modalContainer-call')} >
-          맛집 주소
-        </div>
+        <label for="input-file">
+          <img
+            className={cx("modalContainer-camera")}
+            src={camera}
+            alt="upload"
+          />{" "}
+        </label>
         <input
-          className={cx('modalContainer-call-input')}
-          placeholder='지도에서 클릭해주세요'
+          type="file"
+          id="input-file"
+          style={{ display: "none" }}
+          onChange={(e) => uploadImage(e)}
+        />
+
+        <div className={cx("modalContainer-Input")}>맛집 이름</div>
+        <input
+          className={cx("modalContainer-Input-box")}
+          value={modalName}
+          onChange={(e) => setModalName(e.target.value)}
+        />
+
+        <div className={cx("modalContainer-call")}>맛집 전화번호</div>
+        <input
+          className={cx("modalContainer-call-input")}
+          value={modalPhone}
+          onChange={(e) => setModalPhone(makePhoneNumber(e.target.value))}
+        />
+
+        <div className={cx("modalContainer-call")}>맛집 주소</div>
+        <input
+          className={cx("modalContainer-call-input")}
+          placeholder="지도에서 클릭해주세요"
           value={address.title}
         />
 
-        <div className={cx('modalContainer-map')} >
+        <div className={cx("modalContainer-map")}>
           <MainContainer />
         </div>
-
       </div>
     </>
   );

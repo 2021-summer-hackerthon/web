@@ -44,9 +44,9 @@ export const UPLOADIMAGE = async (form) => {
 
 export const ADDPOST = async (reqData) => {
   const url = '/hotplace';
-  const { data } = await customAxios.post(url, reqData);
+  const data = await customAxios.post(url, reqData);
   console.log(data);
-  return data;
+  return data.data.status;
 }
 
 export const GETPOSTINFO = async (idx) => {
