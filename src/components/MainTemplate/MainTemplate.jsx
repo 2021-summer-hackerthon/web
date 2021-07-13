@@ -17,15 +17,10 @@ const MainTemplate = () => {
   const [isClick, setIsClick] = useRecoilState(isClickCardState);
   const [isModal, setIsModal] = useRecoilState(isModalState);
 
-  const modalOpen = () => {
-
-    setIsModal(isModal ? false : true);
-  }
-
   return (
     <div className={cx("AppWrapper")}>
       {isModal && <ModalComponent />}
-      <div className={cx("AppWrapper-thumb")} onClick={modalOpen} >
+      <div className={cx("AppWrapper-thumb")} onClick={() => setIsModal(true)}>
         <img src={thumb} className={cx("AppWrapper-thumb-svg")} />
       </div>
       <NavContainer />
