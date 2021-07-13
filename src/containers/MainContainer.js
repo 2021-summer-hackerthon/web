@@ -3,7 +3,7 @@ import Main from "components/Main/Main";
 import { GETSTARPOSTS } from "lib/api/postAPI";
 import { GETPROFILE } from "lib/api/profileAPI";
 import { getToken } from "lib/getToken";
-import React, { memo, useCallback, useEffect, useState } from "react";
+import React, { memo, useCallback, useEffect, useRef, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import {
   allStarPostsState,
@@ -25,6 +25,7 @@ const MainContainer = () => {
   const [myNumber, setMyNumber] = useRecoilState(myNumberState);
   const [MARKER, setMarker] = useRecoilState(postsMarkerState);
   const [markerAddress, setMarkerAddress] = useRecoilState(clickAddressState);
+  const [MAP, setMAP] = useRecoilState(mapState);
 
   const setPostsMarkers = async () => {
     try {
@@ -74,10 +75,6 @@ const MainContainer = () => {
   }, []);
 
   useEffect(() => {
-    console.log(markerAddress);
-  }, [markerAddress]);
-
-  useEffect(() => {
     let container = document.getElementById("map");
     let options = {
       center: new kakao.maps.LatLng(35.661239715391845, 128.415),
@@ -95,6 +92,7 @@ const MainContainer = () => {
         position: map.getCenter(),
       });
 
+      console.log(MARKER);
       for (let i = 0; i < MARKER.length; i++) {
         setMark(MARKER[i]);
       }
@@ -116,9 +114,10 @@ const MainContainer = () => {
       }
 
       function setMark(data) {
+        console.log(data);
         let marker = new kakao.maps.Marker({
           map: map,
-          position: new kakao.maps.LatLng(data.x, data.y),
+          position: new kakao.maps.LatLng(data.y, data.x),
         });
 
         kakao.maps.event.addListener(marker, "click", function () {
@@ -180,7 +179,7 @@ const MainContainer = () => {
     }
   }, [place, MARKER]);
 
-  return <Main isLogin={isLogin} />;
+  return <Main />;
 };
 
 export default MainContainer;

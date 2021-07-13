@@ -1,11 +1,14 @@
 import classNames from "classnames";
 import phoneIcon from "asset/phoneIcon.svg";
 import DescIcon from "asset/DescIcon.svg";
+import xBtn from "asset/xButton.svg";
 import { isClickCardState, postInfoState } from "recoil/mapAtom";
 import { useRecoilState, useRecoilValue } from "recoil";
 import Comment from "components/Comment";
 import { useEffect, useRef, useState } from "react";
-import { ADDCOMMENT } from "lib/api/postAPI";
+import FadeIn from "react-fade-in";
+import Swal from "sweetalert2";
+import { ADDCOMMENT, GETPOSTINFO } from "lib/api/postAPI";
 import { getToken } from "lib/getToken";
 import { myGradeState, myNameState, myNumberState, myRoomState } from "recoil/profileAtom";
 import { numFormat } from "lib/numFormat";
@@ -32,6 +35,17 @@ const Info = () => {
     setIsClick(false);
   };
 
+  const getPostInfo = async () => {
+    try {
+      const data = await GETPOSTINFO(postInfo.idx);
+      if (data.status === 200) {
+        setPostInfo(data.data);
+      }
+    } catch (e) {
+      throw e;
+    }
+  };
+
   const addComment = async () => {
     try {
       const dto = {
@@ -45,7 +59,12 @@ const Info = () => {
 
       const data = await ADDCOMMENT(dto);
       if (data.status === 200) {
-        window.location.reload();
+        await Swal.fire({
+          title: "성공",
+          text: "리뷰 작성에 성공했어요",
+          icon: "success",
+        });
+        await getPostInfo();
       }
     } catch (e) {
       throw e;
@@ -54,13 +73,21 @@ const Info = () => {
 
   const onEnterReview = (e) => {
     if (e.key === "Enter") {
-      if (e.target.value.length === 0) {
-        alert("내용을 입력해주세요");
+      if (getToken() === false) {
+        Swal.fire({
+          title: "잠시만요",
+          text: "로그인 해주세요",
+          icon: "error",
+        });
         return;
       }
 
-      if (getToken() === false) {
-        alert("로그인 해주세요");
+      if (e.target.value.length === 0) {
+        Swal.fire({
+          title: "잠시만요",
+          text: "내용을 채워주세요.",
+          icon: "error",
+        });
         return;
       }
 
@@ -73,7 +100,7 @@ const Info = () => {
   return (
     <div className={cx("Info")}>
       <div className={cx("Info-Close")} onClick={onClickClose}>
-        ❌
+        <img src={xBtn} alt="x" />
       </div>
       <div className={cx("Info-Title")}>{postInfo.name}</div>
       <div className={cx("Info-Image")}>
@@ -166,16 +193,28 @@ const Info = () => {
               comment={v.comment}
               anonymous={v.anonymous}
               star={v.star}
-              user={v.user}
             />
           );
         })
         : null}
+      <FadeIn delay={100}>
+        {postInfo.comment
+          ? postInfo.comment.map((v) => {
+              return (
+                <Comment
+                  key={v.idx}
+                  idx={v.idx}
+                  comment={v.comment}
+                  anonymous={v.anonymous}
+                  star={v.star}
+                  user={v.user}
+                />
+              );
+            })
+          : null}
+      </FadeIn>
     </div>
   );
 };
 
 export default Info;
-
-// 0: {idx: 6, star: 1, comment: "ㄹㅇ ㅋㅋ", anonymous: 1}
-// 1: {idx: 7, star: 0, comment: "ㄹㅇ ㅋㅋ", anonymous: 1}

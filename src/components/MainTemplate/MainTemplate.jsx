@@ -6,7 +6,7 @@ import SideContainer from "containers/SideContainer";
 import Info from "../Info";
 import { useRecoilState } from "recoil";
 import { isClickCardState } from "recoil/mapAtom";
-import thumb from '../../asset/thumb.svg';
+import thumb from "../../asset/thumb.svg";
 import { isModalState } from "recoil/modalAtom";
 import ModalComponent from "components/Modal/Modal.component";
 
