@@ -91,6 +91,10 @@
           color: #515151;
           font-weight: bold;
           float: left;
+          max-width: 310px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
         }
       }
     }
