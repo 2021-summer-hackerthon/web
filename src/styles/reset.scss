@@ -31,3 +31,14 @@ body {
 button:focus {
   outline: none;
 }
+
+.marker {
+  font-size: 0.875rem;
+  background-color: white;
+  &-title{
+
+  }
+  &-desc {
+
+  }
+}
