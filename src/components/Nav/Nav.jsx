@@ -16,6 +16,11 @@ const Nav = () => {
   const [isLogin, setIsLogin] = useRecoilState(isLoginState);
   const [profile, setProfile] = useRecoilState(profileState);
 
+  const deltoken = () => {
+    localStorage.removeItem('token');
+    setIsLogin(false);
+  }
+
   const onChangeInput = (e) => {
     setInput(e.target.value);
   };
@@ -35,7 +40,7 @@ const Nav = () => {
       </div>
 
       {isLogin ? (
-        <div className={cx("Nav-Profile")}>
+        <div className={cx("Nav-Profile")} onClick={e => deltoken()} >
           {profile === null || profile === ''
             ? <img src={DefaultProfile} alt="프로필 이미지" />
             : <img src={profile} alt="프로필 이미지" />
