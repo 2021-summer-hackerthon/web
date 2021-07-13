@@ -15,17 +15,16 @@
       float: right;
     }
   }
-  &-Content{
+  &-Content {
     text-align: start;
     padding: 6px;
     display: inline-block;
     min-height: 60px;
-
+    word-break: break-all;
     height: 100%;
     min-width: 354px;
     max-width: 354px;
     width: 100%;
     background-color: white;
-
   }
 }
