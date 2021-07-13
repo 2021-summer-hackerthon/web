@@ -10,7 +10,12 @@ export const placeState = atom({
   default: ""
 })
 
-export const mapState = atom({
-  key:'mapState',
-  default: undefined
+export const isLoginState = atom({
+  key:'isLoginState',
+  default: false
+});
+
+export const isClickCardState = atom({
+  key: 'isClickCardState',
+  default: false,
 });
