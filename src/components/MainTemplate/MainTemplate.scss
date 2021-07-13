@@ -2,7 +2,11 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-
+  max-width: 100vw;
+  max-height: 100vh;
+  min-width: 100vw;
+  max-height: 100vh;
+  overflow: hidden;
   &-SideWrapper {
     height: calc(100vh - 94px);
     display: flex;

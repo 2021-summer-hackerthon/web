@@ -32,7 +32,7 @@ const Side = ({ getAllStarPosts, getAllCommentPosts, getAllRecentPosts }) => {
       case 0:
         return allRecentPosts.map((v) => {
           return (
-            <FadeIn delay={400} key={v.idx} >
+            <FadeIn delay={200} key={v.idx} >
               <CardItem
                 key={v.idx}
                 idx={v.idx}
@@ -52,7 +52,7 @@ const Side = ({ getAllStarPosts, getAllCommentPosts, getAllRecentPosts }) => {
       case 1:
         return allCommentPosts.map((v) => {
           return (
-            <FadeIn delay={400} key={v.idx} >
+            <FadeIn delay={200} key={v.idx} >
               <CardItem
                 key={v.idx}
                 idx={v.idx}
@@ -72,7 +72,7 @@ const Side = ({ getAllStarPosts, getAllCommentPosts, getAllRecentPosts }) => {
       default:
         return allStarPosts.map((v) => {
           return (
-            <FadeIn delay={400} key={v.idx} >
+            <FadeIn delay={200} key={v.idx} >
               <CardItem
                 key={v.idx}
                 idx={v.idx}
@@ -93,7 +93,7 @@ const Side = ({ getAllStarPosts, getAllCommentPosts, getAllRecentPosts }) => {
   };
 
   return (
-    <FadeIn delay={400}>
+    <FadeIn delay={200}>
       <div className={cx("Side")}>
         <div className={cx("Side-TitleWrap")}>
           <div

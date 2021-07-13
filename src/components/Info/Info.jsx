@@ -2,8 +2,6 @@ import classNames from "classnames";
 import phoneIcon from "asset/phoneIcon.svg";
 import DescIcon from "asset/DescIcon.svg";
 import xBtn from "asset/xButton.svg";
-import { Rate } from "antd";
-import "antd/dist/antd.css";
 import { isClickCardState, postInfoState } from "recoil/mapAtom";
 import { useRecoilState, useRecoilValue } from "recoil";
 import Comment from "components/Comment";
@@ -19,6 +17,7 @@ import {
   myRoomState,
 } from "recoil/profileAtom";
 import { numFormat } from "lib/numFormat";
+import Star from "components/Star/Star";
 
 const style = require("./Info.scss");
 const cx = classNames.bind(style);
@@ -154,16 +153,7 @@ const Info = () => {
             {myRoom}
             {numFormat(myNumber)} {username}
           </div>
-          <Rate
-            className={cx("Info-Input-TitleWrap-Star")}
-            allowHalf
-            value={parseFloat(star)}
-            onChange={(e) => {
-              let str = e.toString();
-              console.log(str);
-              setStar(str);
-            }}
-          />
+          <Star star={star} setStar={setStar} />
           <div className={cx("Info-Input-TitleWrap-Anonymous")}>
             <input
               type="checkbox"
@@ -191,7 +181,7 @@ const Info = () => {
       <FadeIn delay={100}>
         {postInfo.comment
           ? postInfo.comment.map((v) => {
-            console.log(v);
+              console.log(v);
               return (
                 <Comment
                   key={v.idx}
