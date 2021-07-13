@@ -7,6 +7,7 @@ import React, { memo, useCallback, useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import {
   allStarPostsState,
+  clickAddressState,
   isLoginState,
   mapState,
   placeState,
@@ -19,7 +20,7 @@ const MainContainer = () => {
   const [isLogin, setIsLogin] = useRecoilState(isLoginState);
   const [profile, setProfile] = useRecoilState(profileState);
   const [MARKER, setMarker] = useRecoilState(postsMarkerState);
-  const [mapAtom, setMapAtom] = useRecoilState(mapState);
+  const [markerAddress, setMarkerAddress] = useRecoilState(clickAddressState);
 
   const setPostsMarkers = async () => {
     try {
@@ -63,6 +64,10 @@ const MainContainer = () => {
     checkLogin();
     setPostsMarkers();
   }, []);
+
+  useEffect(() => {
+    console.log(markerAddress);
+  }, [markerAddress]);
 
   useEffect(() => {
     let container = document.getElementById("map");
@@ -140,6 +145,13 @@ const MainContainer = () => {
           mouseEvent.latLng,
           function (result, status) {
             if (status === kakao.maps.services.Status.OK) {
+              const dto = {
+                title: result[0].address.address_name,
+                x: mouseEvent.latLng.La,
+                y: mouseEvent.latLng.Ma,
+              };
+              setMarkerAddress(dto);
+              console.log(markerAddress);
               let content = `<div class="marker"> <div class='marker-title'>${result[0].address.address_name}</div></div>`;
               // 마커를 클릭한 위치에 표시합니다
               marker.setPosition(mouseEvent.latLng);

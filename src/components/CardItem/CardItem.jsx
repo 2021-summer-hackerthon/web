@@ -20,7 +20,6 @@ const CardItem = ({
 }) => {
   const [isClick, setIsClick] = useRecoilState(isClickCardState);
   const [postInfo, setPostInfo] = useRecoilState(postInfoState);
-  const [mapAtom, setMapAtom] = useRecoilState(mapState);
   const data = {
     idx,
     name,
