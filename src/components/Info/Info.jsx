@@ -7,6 +7,8 @@ import Comment from "components/Comment";
 import { useEffect, useRef, useState } from "react";
 import { ADDCOMMENT } from "lib/api/postAPI";
 import { getToken } from "lib/getToken";
+import { myGradeState, myNameState, myNumberState, myRoomState } from "recoil/profileAtom";
+import { numFormat } from "lib/numFormat";
 
 const style = require("./Info.scss");
 const cx = classNames.bind(style);
@@ -17,6 +19,10 @@ const Info = () => {
   const [star, setStar] = useState("5.0");
   const [review, setReview] = useState("");
   const [anonymous, setAnonymous] = useState(false);
+  const [username, setUsername] = useRecoilState(myNameState);
+  const [myGrade, setMyGrade] = useRecoilState(myGradeState);
+  const [myRoom, setMyRoom] = useRecoilState(myRoomState);
+  const [myNumber, setMyNumber] = useRecoilState(myNumberState);
 
   const onClickAnonymous = () => {
     setAnonymous((anonymous) => !anonymous);
@@ -109,7 +115,7 @@ const Info = () => {
 
       <div className={cx("Info-Input")}>
         <div className={cx("Info-Input-TitleWrap")}>
-          <div className={cx("Info-Input-TitleWrap-Profile")}>2209 손민재</div>
+          <div className={cx("Info-Input-TitleWrap-Profile")}>{myGrade}{myRoom}{numFormat(myNumber)} {username}</div>
           <select
             className={cx("Info-Input-TitleWrap-Star")}
             onChange={(e) => {
@@ -153,16 +159,17 @@ const Info = () => {
       <div className={cx("line")}></div>
       {postInfo.comment
         ? postInfo.comment.map((v) => {
-            return (
-              <Comment
-                key={v.idx}
-                idx={v.idx}
-                comment={v.comment}
-                anonymous={v.anonymous}
-                star={v.star}
-              />
-            );
-          })
+          return (
+            <Comment
+              key={v.idx}
+              idx={v.idx}
+              comment={v.comment}
+              anonymous={v.anonymous}
+              star={v.star}
+              data={v.data}
+            />
+          );
+        })
         : null}
     </div>
   );

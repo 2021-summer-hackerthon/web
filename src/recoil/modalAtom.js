@@ -15,3 +15,12 @@ export const modalNameState = atom({
   default: '',
 });
 
+export const modalPhoneState = atom({
+  key: 'modalPhone',
+  default: '',
+});
+
+export const modalImageState = atom({
+  key: 'modalImage',
+  default: '',
+});

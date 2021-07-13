@@ -17,7 +17,6 @@ const TokenContainer = () => {
   const getToken = async () => {
 
     const { data } = await GETTOKEN(query);
-    console.log(data.user.profileImage);
 
     setProfile(data.user.profileImage);
 

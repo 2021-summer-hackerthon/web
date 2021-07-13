@@ -34,3 +34,17 @@ export const ADDCOMMENT = async (a) => {
   console.log(data);
   return data;
 };
+
+export const UPLOADIMAGE = async (form) => {
+  const url = `/upload`;
+  const { data } = await customAxios.post(url, form);
+  console.log(data);
+  return data;
+}
+
+export const ADDPOST = async (reqData) => {
+  const url = '/hotplace';
+  const { data } = await customAxios.post(url, reqData);
+  console.log(data);
+  return data;
+}

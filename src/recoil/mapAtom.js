@@ -56,6 +56,6 @@ export const mapState = atom({
 });
 
 export const clickAddressState = atom({
-  key:'clickAddressState',
+  key: 'clickAddressState',
   default: {}
 });
