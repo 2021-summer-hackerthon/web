@@ -1,13 +1,89 @@
 import classNames from "classnames";
 import CardItem from "components/CardItem/CardItem";
+import { useEffect } from "react";
 import { useRecoilState } from "recoil";
 import { AllPostsCategoryState } from "recoil/mapAtom";
+import {
+  allCommentPostsState,
+  allRecentPostsState,
+  allStarPostsState,
+} from "recoil/mapAtom";
 
 const style = require("./Side.scss");
 const cx = classNames.bind(style);
 
-const Side = () => {
+const Side = ({ getAllStarPosts, getAllCommentPosts, getAllRecentPosts }) => {
   const [category, setCategory] = useRecoilState(AllPostsCategoryState);
+  const [allStarPosts, setAllStarPosts] = useRecoilState(allStarPostsState);
+  const [allCommentPosts, setAllCommentPosts] =
+    useRecoilState(allCommentPostsState);
+  const [allRecentPosts, setAllRecentPosts] =
+    useRecoilState(allRecentPostsState);
+
+  useEffect(() => {
+    getAllStarPosts();
+    getAllCommentPosts();
+    getAllRecentPosts();
+  }, []);
+
+  const categorySwitch = () => {
+    switch (category) {
+      case 0:
+        console.log("0");
+        return allRecentPosts.map((v) => {
+          return (
+            <CardItem
+              idx={v.idx}
+              name={v.name}
+              desc={v.discript}
+              x={v.xPosition}
+              y={v.yPosition}
+              phone={v.phone}
+              image={v.image}
+              star={v.star}
+              anonymous={v.anonymous}
+              comment={v.comment}
+            />
+          );
+        });
+      case 1:
+        console.log("1");
+        return allCommentPosts.map((v) => {
+          return (
+            <CardItem
+              idx={v.idx}
+              name={v.name}
+              desc={v.discript}
+              x={v.xPosition}
+              y={v.yPosition}
+              phone={v.phone}
+              image={v.image}
+              star={v.star}
+              anonymous={v.anonymous}
+              comment={v.comment}
+            />
+          );
+        });
+      default:
+        console.log("2");
+        return allStarPosts.map((v) => {
+          return (
+            <CardItem
+              idx={v.idx}
+              name={v.name}
+              desc={v.discript}
+              x={v.xPosition}
+              y={v.yPosition}
+              phone={v.phone}
+              image={v.image}
+              anonymous={v.anonymous}
+              comment={v.comment}
+              star={v.star}
+            />
+          );
+        });
+    }
+  };
 
   return (
     <div className={cx("Side")}>
@@ -37,14 +113,7 @@ const Side = () => {
           평점순
         </div>
       </div>
-      {/* category state에 따라서 다르게 렌더링 */}
-      <CardItem />
-      <CardItem />
-      <CardItem />
-      <CardItem />
-      <CardItem />
-      <CardItem />
-      <CardItem />
+      {categorySwitch()}
     </div>
   );
 };

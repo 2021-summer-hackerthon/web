@@ -20,22 +20,27 @@ export const isClickCardState = atom({
   default: false,
 });
 
-export const allCommentPosts = atom({
+export const allCommentPostsState = atom({
   key: "allCommnetPosts",
   default: [],
 });
 
-export const allStarPosts = atom({
+export const allRecentPostsState = atom({
+  key: "allRecentPostsState",
+  default: [],
+});
+
+export const allStarPostsState = atom({
   key: "allStarPosts",
   default: [],
 });
 
-export const fivePosts = atom({
-  key: "fivePosts",
-  default: [],
+export const AllPostsCategoryState = atom({
+  key: "AllPostsCategoryState",
+  default: 0,
 });
 
-export const AllPostsCategoryState = atom({
-  key:'AllPostsCategoryState',
-  default: 0
+export const postInfoState = atom({
+  key: "postInfoState",
+  default: {},
 });

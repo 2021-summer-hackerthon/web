@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import img from "asset/defaultCardImg.svg";
-import { isClickCardState } from "recoil/mapAtom";
-import { useRecoilState } from "recoil";
+import { isClickCardState, postInfoState } from "recoil/mapAtom";
+import { useRecoilState, useRecoilValue } from "recoil";
 import Comment from "components/Comment";
 import { useEffect, useRef, useState } from "react";
 
@@ -10,18 +10,20 @@ const cx = classNames.bind(style);
 
 const Info = () => {
   const [isClick, setIsClick] = useRecoilState(isClickCardState);
+  const [postInfo, setPostInfo] = useRecoilState(postInfoState);
   const [star, setStar] = useState("5.0");
   const [review, setReview] = useState("");
   const onClickClose = () => {
     setIsClick(false);
   };
+  console.log(postInfo);
   return (
     <div className={cx("Info")}>
       <div className={cx("Info-Close")} onClick={onClickClose}>
         ❌
       </div>
       <div className={cx("Info-Image")}>
-        <img src={img} alt="이미지" />
+        <img src={postInfo.image} alt="이미지" />
       </div>
       <div className={cx("Info-Input")}>
         <div className={cx("Info-Input-TitleWrap")}>
@@ -56,13 +58,11 @@ const Info = () => {
         />
       </div>
       <div className={cx("line")}></div>
-      <Comment />
-      <Comment />
-      <Comment />
-      <Comment />
-      <Comment />
-      <Comment />
-      <Comment />
+      {postInfo.comment
+        ? postInfo.comment.map((v) => {
+            return <Comment />;
+          })
+        : null}
     </div>
   );
 };

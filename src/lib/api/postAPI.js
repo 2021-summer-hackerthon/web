@@ -1,24 +1,29 @@
 import { customAxios } from "lib/CustomAxios";
 
 export const GETCOMMENTPOSTS = async () => {
-  const url = `/all?option=comment`;
+  const url = `/hotplace/all?option=comment`;
   const { data } = await customAxios.get(url);
+  console.log(data);
   return data;
 };
 
 export const GETSTARPOSTS = async () => {
-  const url = `/all?option=star`;
+  const url = `/hotplace/all?option=star`;
   const { data } = await customAxios.get(url);
+  console.log(data);
   return data;
 };
 
-export const GETFIVEPOSTS = async () => {
-  const url = `/five`;
-  const { data } = await customAxios.get(url);
+export const ADDPOSTS = async (a) => {
+  const url = '/hotplace';
+  const { data } = await customAxios.post(url, a);
+  console.log(data);
   return data;
 };
 
-export const ADDPOSTS = async ({ data }) => {
-  const { data } = await customAxios.post(url, data);
+export const GETRECENTPOSTS = async () => {
+  const url = `/hotplace/search?keyword`;
+  const { data } = await customAxios.get(url);
+  console.log(data);
   return data;
-};
+}
