@@ -193,6 +193,7 @@ const Info = () => {
               comment={v.comment}
               anonymous={v.anonymous}
               star={v.star}
+              user={v.user}
             />
           );
         })
@@ -200,17 +201,17 @@ const Info = () => {
       <FadeIn delay={100}>
         {postInfo.comment
           ? postInfo.comment.map((v) => {
-              return (
-                <Comment
-                  key={v.idx}
-                  idx={v.idx}
-                  comment={v.comment}
-                  anonymous={v.anonymous}
-                  star={v.star}
-                  user={v.user}
-                />
-              );
-            })
+            return (
+              <Comment
+                key={v.idx}
+                idx={v.idx}
+                comment={v.comment}
+                anonymous={v.anonymous}
+                star={v.star}
+                user={v.user}
+              />
+            );
+          })
           : null}
       </FadeIn>
     </div>
