@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import MainContainer from "containers/MainContainer";
 import { useRecoilState } from "recoil";
-import { isModalState } from "recoil/modalAtom";
+import { isModalState, modalDescriptState, modalNameState } from "recoil/modalAtom";
 import xButton from '../../asset/xButton.svg';
 
 const style = require("./Modal.component.scss");
@@ -9,6 +9,8 @@ const cx = classNames.bind(style);
 
 const ModalComponent = () => {
   const [isModal, setIsModal] = useRecoilState(isModalState);
+  const [modalDescript, setModalDescript] = useRecoilState(modalDescriptState);
+  const [modalName, setModalName] = useRecoilState(modalNameState);
 
   return (
     <>
@@ -30,7 +32,7 @@ const ModalComponent = () => {
         <div className={cx('modalContainer-Input')} >
           맛집 이름
         </div>
-        <input className={cx('modalContainer-Input-box')} />
+        <input className={cx('modalContainer-Input-box')} value={modalName} onChange={e => setModalName(e.target.value)} />
 
         <div className={cx('modalContainer-call')} >
           맛집 전화번호
@@ -40,7 +42,12 @@ const ModalComponent = () => {
         <div className={cx('modalContainer-call')} >
           맛집 주소
         </div>
-        <input className={cx('modalContainer-call-input')} placeholder='지도에서 클릭해주세요' />
+        <input
+          className={cx('modalContainer-call-input')}
+          placeholder='지도에서 클릭해주세요'
+          value={modalDescript}
+          onChange={e => setModalDescript(e.target.value)}
+        />
 
 
         <div className={cx('modalContainer-map')} >
