@@ -37,7 +37,7 @@ const Side = ({ getAllStarPosts, getAllCommentPosts, getAllRecentPosts }) => {
                 key={v.idx}
                 idx={v.idx}
                 name={v.name}
-                desc={v.discript}
+                discript={v.discript}
                 x={v.xPosition}
                 y={v.yPosition}
                 phone={v.phone}
@@ -57,7 +57,7 @@ const Side = ({ getAllStarPosts, getAllCommentPosts, getAllRecentPosts }) => {
                 key={v.idx}
                 idx={v.idx}
                 name={v.name}
-                desc={v.discript}
+                discript={v.discript}
                 x={v.xPosition}
                 y={v.yPosition}
                 phone={v.phone}
@@ -77,7 +77,7 @@ const Side = ({ getAllStarPosts, getAllCommentPosts, getAllRecentPosts }) => {
                 key={v.idx}
                 idx={v.idx}
                 name={v.name}
-                desc={v.discript}
+                discript={v.discript}
                 x={v.xPosition}
                 y={v.yPosition}
                 phone={v.phone}

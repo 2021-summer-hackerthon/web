@@ -9,7 +9,7 @@ const cx = classNames.bind(style);
 const CardItem = ({
   idx,
   name,
-  desc,
+  discript,
   x,
   y,
   phone,
@@ -23,7 +23,7 @@ const CardItem = ({
   const data = {
     idx,
     name,
-    desc,
+    discript,
     x,
     y,
     phone,

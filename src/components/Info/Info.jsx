@@ -14,7 +14,13 @@ import Comment from "components/Comment";
 import { useEffect, useRef, useState } from "react";
 import FadeIn from "react-fade-in";
 import Swal from "sweetalert2";
-import { ADDCOMMENT, GETCOMMENTPOSTS, GETPOSTINFO, GETRECENTPOSTS, GETSTARPOSTS } from "lib/api/postAPI";
+import {
+  ADDCOMMENT,
+  GETCOMMENTPOSTS,
+  GETPOSTINFO,
+  GETRECENTPOSTS,
+  GETSTARPOSTS,
+} from "lib/api/postAPI";
 import { getToken } from "lib/getToken";
 import {
   myGradeState,
@@ -87,6 +93,7 @@ const Info = () => {
   const getPostInfo = async () => {
     try {
       const data = await GETPOSTINFO(postInfo.idx);
+      console.log(data);
       if (data.status === 200) {
         setPostInfo(data.data);
       }
@@ -94,10 +101,6 @@ const Info = () => {
       throw e;
     }
   };
-
-  useEffect(() => {
-    getPostInfo();
-  }, []);
 
   const addComment = async () => {
     try {
@@ -117,10 +120,10 @@ const Info = () => {
           text: "리뷰 작성에 성공했어요",
           icon: "success",
         });
-        await getAllStarPosts();
-        await getAllCommentPosts();
-        await getAllRecentPosts();
-        await getPostInfo();
+        getAllStarPosts();
+        getAllCommentPosts();
+        getAllRecentPosts();
+        getPostInfo();
       }
     } catch (e) {
       throw e;
@@ -152,7 +155,7 @@ const Info = () => {
     }
   };
 
-  console.log(postInfo);
+  console.log(postInfo.discript);
   return (
     <div className={cx("Info")}>
       <div className={cx("Info-Close")} onClick={onClickClose}>
@@ -190,7 +193,7 @@ const Info = () => {
               alt="마커"
             />
             <div className={cx("Info-Content-Mid-Desc-Content")}>
-              {postInfo.desc ? postInfo.desc : "요약 정보가 없습니다"}
+              {postInfo.discript ? postInfo.discript : "요약 정보가 없습니다"}
             </div>
           </div>
         </div>

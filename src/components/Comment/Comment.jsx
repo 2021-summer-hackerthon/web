@@ -97,10 +97,10 @@ const Comment = ({ idx, comment, anonymous, star, user }) => {
           text: "댓글을 지우는데 성공했어요",
           icon: "success",
         });
-        await getAllStarPosts();
-        await getAllCommentPosts();
-        await getAllRecentPosts();
-        await getPostInfo();
+        getAllStarPosts();
+        getAllCommentPosts();
+        getAllRecentPosts();
+        getPostInfo();
       }
     } catch (e) {
       throw e;
