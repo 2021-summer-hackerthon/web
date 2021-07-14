@@ -93,7 +93,6 @@ const Info = () => {
   const getPostInfo = async () => {
     try {
       const data = await GETPOSTINFO(postInfo.idx);
-      console.log(data);
       if (data.status === 200) {
         setPostInfo(data.data);
       }
@@ -155,7 +154,6 @@ const Info = () => {
     }
   };
 
-  console.log(postInfo.discript);
   return (
     <div className={cx("Info")}>
       <div className={cx("Info-Close")} onClick={onClickClose}>
@@ -234,7 +232,6 @@ const Info = () => {
       <FadeIn delay={100}>
         {postInfo.comment
           ? postInfo.comment.map((v) => {
-              console.log(v);
               return (
                 <Comment
                   key={v.idx}

@@ -33,7 +33,6 @@ const MainContainer = () => {
       if (data.status === 200) {
         let t = [];
         data.data.map((v) => {
-          console.log(v);
           let dto = {
             title: v.name,
             x: v.xPosition,
@@ -92,7 +91,6 @@ const MainContainer = () => {
         position: map.getCenter(),
       });
 
-      console.log(MARKER);
       for (let i = 0; i < MARKER.length; i++) {
         setMark(MARKER[i]);
       }
@@ -114,7 +112,6 @@ const MainContainer = () => {
       }
 
       function setMark(data) {
-        console.log(data);
         let marker = new kakao.maps.Marker({
           map: map,
           position: new kakao.maps.LatLng(data.y, data.x),
@@ -130,12 +127,10 @@ const MainContainer = () => {
       }
 
       function displayMarker(place) {
-        console.log(place);
         let marker = new kakao.maps.Marker({
           map: map,
           position: new kakao.maps.LatLng(place.y, place.x),
         });
-        console.log(marker);
 
         // 마커에 클릭이벤트를 등록합니다
         kakao.maps.event.addListener(marker, "click", function () {
@@ -158,7 +153,6 @@ const MainContainer = () => {
                 y: mouseEvent.latLng.Ma,
               };
               setMarkerAddress(dto);
-              console.log(markerAddress);
               let content = `<div class="marker"> <div class='marker-title'>${result[0].address.address_name}</div></div>`;
               // 마커를 클릭한 위치에 표시합니다
               marker.setPosition(mouseEvent.latLng);

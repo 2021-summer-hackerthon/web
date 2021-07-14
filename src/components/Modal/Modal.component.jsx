@@ -69,10 +69,8 @@ const ModalComponent = () => {
     const file = e.target.files[0];
 
     const formData = new FormData();
-    console.log(file);
     formData.append("images", file);
 
-    console.log(formData);
 
     try {
       const { data } = await UPLOADIMAGE(formData);
@@ -103,7 +101,6 @@ const ModalComponent = () => {
       return;
     }
 
-    console.log(data);
 
     try {
       await ADDPOST(data);
