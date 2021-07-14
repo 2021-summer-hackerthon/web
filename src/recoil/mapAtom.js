@@ -37,7 +37,7 @@ export const allStarPostsState = atom({
 
 export const AllPostsCategoryState = atom({
   key: "AllPostsCategoryState",
-  default: 0,
+  default: 2,
 });
 
 export const postInfoState = atom({
