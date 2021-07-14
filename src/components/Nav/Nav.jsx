@@ -21,6 +21,7 @@ const Nav = () => {
   const deltoken = () => {
     localStorage.removeItem("token");
     setIsLogin(false);
+    window.location.reload();
   };
 
   const onChangeInput = (e) => {
