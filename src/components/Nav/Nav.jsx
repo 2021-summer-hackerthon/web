@@ -1,5 +1,5 @@
 /*global kakao */
-import { memo, useEffect, useState } from "react";
+import { memo, useState } from "react";
 import MainLogo from "asset/MainLogo.svg";
 import DefaultProfile from "asset/DefaultProfile.svg";
 import classNames from "classnames";

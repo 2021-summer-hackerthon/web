@@ -9,9 +9,9 @@ import {
   isClickCardState,
   postInfoState,
 } from "recoil/mapAtom";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 import Comment from "components/Comment";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import FadeIn from "react-fade-in";
 import Swal from "sweetalert2";
 import {

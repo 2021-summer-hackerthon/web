@@ -21,7 +21,7 @@ const MainTemplate = () => {
     <div className={cx("AppWrapper")}>
       {isModal && <ModalComponent />}
       <div className={cx("AppWrapper-thumb")} onClick={() => setIsModal(true)}>
-        <img src={thumb} className={cx("AppWrapper-thumb-svg")} />
+        <img src={thumb} className={cx("AppWrapper-thumb-svg")} alt="생성" />
       </div>
       <NavContainer />
       <div className={cx("AppWrapper-SideWrapper")}>

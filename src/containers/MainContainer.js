@@ -3,17 +3,21 @@ import Main from "components/Main/Main";
 import { GETSTARPOSTS } from "lib/api/postAPI";
 import { GETPROFILE } from "lib/api/profileAPI";
 import { getToken } from "lib/getToken";
-import React, { memo, useCallback, useEffect, useRef, useState } from "react";
+import React, { useEffect } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import {
-  allStarPostsState,
   clickAddressState,
   isLoginState,
-  mapState,
   placeState,
   postsMarkerState,
 } from "recoil/mapAtom";
-import { myGradeState, myNameState, myNumberState, myRoomState, profileState } from "recoil/profileAtom";
+import {
+  myGradeState,
+  myNameState,
+  myNumberState,
+  myRoomState,
+  profileState,
+} from "recoil/profileAtom";
 
 const MainContainer = () => {
   const place = useRecoilValue(placeState);
@@ -25,8 +29,7 @@ const MainContainer = () => {
   const [myNumber, setMyNumber] = useRecoilState(myNumberState);
   const [MARKER, setMarker] = useRecoilState(postsMarkerState);
   const [markerAddress, setMarkerAddress] = useRecoilState(clickAddressState);
-  const [MAP, setMAP] = useRecoilState(mapState);
-
+  
   const setPostsMarkers = async () => {
     try {
       const data = await GETSTARPOSTS();
@@ -76,7 +79,7 @@ const MainContainer = () => {
   useEffect(() => {
     let container = document.getElementById("map");
     let options = {
-      center: new kakao.maps.LatLng(35.6625000, 128.414119415),
+      center: new kakao.maps.LatLng(35.6625, 128.414119415),
       level: 3,
     };
     let map = new kakao.maps.Map(container, options);
